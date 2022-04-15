@@ -11,6 +11,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TransactionService } from './service/transaction/transaction.service';
 
 
 
@@ -30,7 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     MatNativeDateModule,
   ],
-  providers: [],
+  providers: [TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
