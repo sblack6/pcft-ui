@@ -32,6 +32,10 @@ export class TransactionService {
     return this.http.delete(`${this.transactions_url}${id}`)
   }
 
+  searchByDate(startDate: string, endDate: string) {
+    return this.http.get(`${this.transactions_url}/search?startDate=${startDate}&endDate=${endDate}`);
+  }
+
   uploadTransactions(source: string, file: File): Observable<any> {
     let formData: FormData = new FormData();
     formData.append("file", file);
