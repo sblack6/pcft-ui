@@ -3,6 +3,19 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-item {
+    flex: 1;
+}
+
 .toolbar {
     display: flex;
     align-items: center;
@@ -15,8 +28,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: solid 1px;
 }
 
+.border-excl-left {
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+    border-right: solid 1px;
+}
+
 .border-bottom {
     border-bottom: solid 1px;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .widget-title {
@@ -40,6 +63,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .padding-16 {
     padding: 1rem;
+}
+
+.padding-sides-16 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.padding-top-btm-8 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .padding-8 {

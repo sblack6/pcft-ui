@@ -1,0 +1,18 @@
+<!-- <div class="flex-column padding-sides-16 padding-top-btm-8" *ngFor="let budgetItem of budgetItems">
+    <div class="flex-item">
+        <span>{{budgetItem.category}}  ${{budgetItem.amount}}</span>
+    </div>
+</div> -->
+
+<table>
+    <tr>
+        <th>Category</th>
+        <th>Amount</th>
+    </tr>
+    <ng-container *ngFor="let budgetItem of budgetItems">
+        <tr>
+            <td>{{budgetItem.category}}</td>
+            <td>{{budgetItem.amount}}</td>
+        </tr>
+    </ng-container>
+</table>

@@ -12,7 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TransactionService } from './service/transaction/transaction.service';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { BudgetEditorComponent } from './budget/budget-editor/budget-editor.component';
+import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit-table.component'
 
 
 
@@ -23,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http'
     DatePickerComponent,
     HeaderComponent,
     HomeComponent,
+    BudgetEditorComponent,
+    BudgetEditTableComponent,
   ],
   imports: [
     AppRoutingModule,
