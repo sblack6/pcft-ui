@@ -36,6 +36,14 @@ export class TransactionService {
     return this.http.get(`${this.transactions_url}/search?startDate=${startDate}&endDate=${endDate}`);
   }
 
+  search(startDate: string, endDate: string, type: string, category: string, tags: string) {
+    return this.http.get(`${this.transactions_url}/search?startDate=${startDate}&endDate=${endDate}&type=${type}&category=${category}&tags=${tags}`);
+  }
+
+  getDefaultBudget() {
+    return this.http.get(`${this.transactions_url}/search?type=DEFAULT_BUDGET`)
+  }
+
   uploadTransactions(source: string, file: File): Observable<any> {
     let formData: FormData = new FormData();
     formData.append("file", file);
