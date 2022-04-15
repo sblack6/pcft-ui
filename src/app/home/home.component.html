@@ -1,2 +1,13 @@
 <p>home works!</p>
-<app-date-picker></app-date-picker>
+
+
+<div class="margin-32 border">
+    <div class="widget-title border-bottom">
+        <span class="widget-title-font padding-16">Budget Items</span>
+        <app-date-picker
+            class="flex-align-right padding-8 paddin-right-16"
+            (dateChanged)="onDateChanged($event)"
+        ></app-date-picker>
+    </div>
+    <div class="padding-16">placeholder text</div>
+</div>

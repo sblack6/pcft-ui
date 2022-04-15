@@ -11,6 +11,41 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-weight: 600;
 }
 
-.toolbar .text {
+.border {
+    border: solid 1px;
+}
+
+.border-bottom {
+    border-bottom: solid 1px;
+}
+
+.widget-title {
+    display: flex;
+    align-items: center;
+    background-color: lightsteelblue;
+}
+
+.widget-title-font {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.margin-32 {
+    margin: 2rem;
+}
+
+.padding-right-16 {
+    padding-right: 1rem;
+}
+
+.padding-16 {
     padding: 1rem;
+}
+
+.padding-8 {
+    padding: 0.5rem;
+}
+
+.flex-align-right {
+    margin-left: auto;
 }
