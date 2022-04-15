@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,22 +6,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css']
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent {
+
+  @Output() dateChanged: EventEmitter<any> = new EventEmitter();
 
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
   });
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   onDateChange() {
-    console.log('Range: ', this.range);
-    console.log('Start date: ', this.range.value.start)
-    console.log('End date: ', this.range.value.end)
+    this.dateChanged.emit(this.range.value);
   }
 
 }
