@@ -7,8 +7,10 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TransactionService } from './service/transaction/transaction.service';
@@ -34,6 +36,8 @@ import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit
     BrowserModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatNativeDateModule,
     HttpClientModule,
     ReactiveFormsModule,

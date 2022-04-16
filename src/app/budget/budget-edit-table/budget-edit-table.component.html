@@ -1,18 +1,41 @@
-<!-- <div class="flex-column padding-sides-16 padding-top-btm-8" *ngFor="let budgetItem of budgetItems">
-    <div class="flex-item">
-        <span>{{budgetItem.category}}  ${{budgetItem.amount}}</span>
-    </div>
-</div> -->
-
-<table>
-    <tr>
-        <th>Category</th>
-        <th>Amount</th>
-    </tr>
-    <ng-container *ngFor="let budgetItem of budgetItems">
-        <tr>
-            <td>{{budgetItem.category}}</td>
-            <td>{{budgetItem.amount}}</td>
-        </tr>
+<div [formGroup]="budgetForm">
+    <ng-container formArrayName="categories">
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+            </tr>
+            <ng-container *ngFor="let categoryForm of categories.controls; let i = index">
+                <div [formGroup]="categoryForm">
+                    <mat-form-field appearance="fill">
+                        <input matInput
+                            formControlName="name"
+                            placeholder="Category Name"
+                        >
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="number" formControlName="amount" placeholder="0" (change)="amountChange()">
+                    </mat-form-field>
+                    <mat-icon class="delete-btn" (click)="deleteCategory(i)">delete_forever</mat-icon>
+                </div>
+            </ng-container>
+            <tr>
+                <td>Total</td>
+                <td>${{total}}</td>
+            </tr>
+        </table>
     </ng-container>
-</table>
+</div>
+
+
+<button mat-mini-fab (click)="addCategory()">
+    <mat-icon class="add-course-btn">add</mat-icon>
+</button>
+
+<button
+    type="submit"
+    [title]="budgetForm.valid ? 'Update' : 'Form data invalid'"
+    (click)="save()"
+    [disabled]='!budgetForm.valid'>
+    Save
+</button>
