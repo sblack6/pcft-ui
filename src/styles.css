@@ -75,6 +75,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding-bottom: 0.5rem;
 }
 
+.padding-left-8 {
+    padding-left: 0.5rem;
+}
+
 .padding-8 {
     padding: 0.5rem;
 }
