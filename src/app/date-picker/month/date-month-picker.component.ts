@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { convertDatePickerOutputToApiDate } from '../date-picker-utility';
 
 
 @Component({
@@ -14,12 +15,9 @@ export class DateMonthPickerComponent {
   date = new FormControl();
 
   onDateChange(monthAndYear, datePicker) {
-    console.log('Month & year selected: ', JSON.stringify(monthAndYear)) //2025-02-01
-    console.log('Month and year type: ', typeof(monthAndYear))
-    
     this.date.setValue(monthAndYear);
     datePicker.close();
-    this.dateChanged.emit(this.date.value);
+    this.dateChanged.emit(convertDatePickerOutputToApiDate(JSON.stringify(this.date.value)));
   }
 
 }

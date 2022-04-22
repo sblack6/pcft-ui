@@ -15,7 +15,7 @@
                 <span class="padding-16 bold">Budget Editor</span>
                 <app-date-month-picker (dateChanged)="budgetMonthSelected($event)"></app-date-month-picker>
             </div>
-            <app-budget-edit-table [budgetItems]="defaultBudgetItems"></app-budget-edit-table>
+            <app-budget-edit-table [budgetItems]="selectedMonthBudgetItems"></app-budget-edit-table>
         </div>
         <div class="flex-third border-left">
             <div class="header-height border-bottom">
