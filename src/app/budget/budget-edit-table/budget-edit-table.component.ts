@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Transaction } from 'src/app/model/transaction';
+import { TransactionService } from 'src/app/service/transaction/transaction.service';
 
 @Component({
   selector: 'app-budget-edit-table',
@@ -10,6 +11,9 @@ import { Transaction } from 'src/app/model/transaction';
 export class BudgetEditTableComponent {
 
   _budgetItems: Transaction[];
+
+  type: string;
+  date: string;
 
   total = 0;
 
@@ -33,11 +37,13 @@ export class BudgetEditTableComponent {
     return this.budgetForm.controls["categories"] as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private transactionService: TransactionService) {}
 
   initBudgetForm() {
+    this.type = this.budgetItems[0].type;
+    this.date = this.budgetItems[0].date;
     this.budgetItems.forEach((transaction: Transaction) => {
-      this.addCategory(transaction.category, transaction.amount);
+      this.addCategory(transaction.category, transaction.amount, transaction.id);
     });
     this.amountChange();
   }
@@ -50,10 +56,11 @@ export class BudgetEditTableComponent {
     this.total = sum;
   }
 
-  addCategory(name: string = '', amount: number = 0) {
+  addCategory(name: string = '', amount: number = 0, id: number = null) {
     const categoryForm = this.formBuilder.group({
       name: [name, Validators.required],
-      amount: [amount, Validators.required]
+      amount: [amount, Validators.required],
+      id: id,
     });
 
     this.categories.push(categoryForm);
@@ -61,9 +68,23 @@ export class BudgetEditTableComponent {
 
   deleteCategory(index: number) {
     this.categories.removeAt(index);
+    this.transactionService.delete(this.categories.controls[index].value.id).subscribe(data => console.log('Delete:', data));
   }
 
   save() {
-    // TO DO.
+    const budgetItemsToSave: Transaction[] = [];
+    this.categories.controls.forEach(formControl => {
+      const budgetItem: Transaction = {
+        id: formControl.value.id,
+        category: formControl.value.name,
+        amount: formControl.value.amount,
+        type: this.type,
+        date: this.date,
+      }
+      budgetItemsToSave.push(budgetItem);
+    });
+    this.transactionService.create(budgetItemsToSave).subscribe(data => {
+      console.log('Saved budget items: ', data)
+    });
   }
 }

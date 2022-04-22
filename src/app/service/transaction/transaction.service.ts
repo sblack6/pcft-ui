@@ -16,8 +16,8 @@ export class TransactionService {
     return this.http.get(`${this.transactions_url}/list`)
   }
 
-  create(transaction: Transaction) {
-    return this.http.post(`${this.transactions_url}`, transaction)
+  create(transactions: Transaction[]) {
+    return this.http.post(`${this.transactions_url}`, transactions)
   }
 
   read(id: number) {
@@ -29,15 +29,21 @@ export class TransactionService {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.transactions_url}${id}`)
+    return this.http.delete(`${this.transactions_url}/${id}`)
   }
 
   searchByDate(startDate: string, endDate: string) {
     return this.http.get(`${this.transactions_url}/search?startDate=${startDate}&endDate=${endDate}`);
   }
 
-  search(startDate: string, endDate: string, type: string, category: string, tags: string) {
-    return this.http.get(`${this.transactions_url}/search?startDate=${startDate}&endDate=${endDate}&type=${type}&category=${category}&tags=${tags}`);
+  search(startDate: string = null, endDate: string = null, type: string = null, category: string = null, tags: string = null) {
+    let urlParams = ''
+    urlParams += startDate ? `startDate=${startDate}&` : '';
+    urlParams += endDate ? `endDate=${endDate}&` : '';
+    urlParams += type ? `type=${type}&` : '';
+    urlParams += category ? `category=${category}&` : '';
+    urlParams += tags ? `tags=${tags}` : '';
+    return this.http.get(`${this.transactions_url}/search?${urlParams}`);
   }
 
   getDefaultBudget() {
