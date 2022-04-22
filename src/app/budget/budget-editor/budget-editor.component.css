@@ -1,1 +1,13 @@
+.flex-third {
+    flex: 1 1 30%;
+}
 
+.header-height {
+    height: 150px;
+}
+
+.grid-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+}
