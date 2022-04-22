@@ -13,6 +13,7 @@ export class BudgetEditorComponent implements OnInit {
   BUDGET = TYPE_BUDGET;
 
   budgetEditorMonth;
+  
   defaultBudgetItems: Transaction[];
 
   selectedMonthBudgetItems: Transaction[];

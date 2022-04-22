@@ -47,6 +47,16 @@ export class BudgetEditTableComponent implements OnInit {
     return this._date;
   }
 
+  /** Input a list of budget items instead of getting from API */
+  @Input() set inputBudgetItems(value: Transaction[]) {
+    if (value) {
+      this.budgetItems = value;
+      this.initBudgetForm();
+    }
+  }
+
+  @Input() disableEdit = false;
+
   /** The group of budget items for the user to edit */
   budgetForm: FormGroup;
 
@@ -66,7 +76,7 @@ export class BudgetEditTableComponent implements OnInit {
       this._type = TYPE_DEFAULT_BUDGET;
       this._date = DEFAULT_BUDGET_DATE;
     }
-    if (this.type !== undefined && this.date !== undefined) {
+    if (this.type && this.date) {
       this.transactionService.search(this.date, this.date, this.type).subscribe((data: Transaction[]) => {
         this.budgetItems = data;
         this.initBudgetForm();
@@ -96,6 +106,9 @@ export class BudgetEditTableComponent implements OnInit {
     this.budgetItems.forEach((transaction: Transaction) => {
       this.addCategory(transaction.category, transaction.amount, transaction.id);
     });
+    if (this.disableEdit) {
+      this.categories.controls.forEach(formControl => formControl.disable());
+    }
 
     this.calculateTotal();
   }

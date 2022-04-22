@@ -18,8 +18,7 @@
                 <span class="padding-16 bold">Budget Averages</span>
                 <app-date-range-picker (dateChanged)="budgetMonthSelected($event)"></app-date-range-picker>
             </div>
-            <div>Placeholder</div>
+            <app-budget-edit-table [inputBudgetItems]="defaultBudgetItems" [disableEdit]="true"></app-budget-edit-table>
         </div>
-        
     </div>
 </div>

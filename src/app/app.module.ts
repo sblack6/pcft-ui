@@ -17,7 +17,7 @@ import { TransactionService } from './service/transaction/transaction.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BudgetEditorComponent } from './budget/budget-editor/budget-editor.component';
 import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit-table.component';
-import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.component'
+import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.component';
 
 @NgModule({
   declarations: [

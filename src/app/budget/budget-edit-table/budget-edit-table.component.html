@@ -16,7 +16,7 @@
                     <mat-form-field class="flex-item" appearance="fill" class="padding-left-8">
                         <input matInput type="number" formControlName="amount" placeholder="0" (change)="calculateTotal()">
                     </mat-form-field>
-                    <mat-icon class="delete-btn padding-left-8" (click)="deleteCategory(i)">delete_forever</mat-icon>
+                    <mat-icon *ngIf="!disableEdit" class="delete-btn padding-left-8" (click)="deleteCategory(i)">delete_forever</mat-icon>
                 </div>
             </ng-container>
             <div class="flex">
@@ -31,9 +31,10 @@
         <div class="flex">
             <button
                 (click)="onCopyDefaultBudget()"
+                [disabled]="disableEdit"
             >Copy Default Budget
             </button>
-            <button mat-mini-fab (click)="addCategory()">
+            <button mat-mini-fab (click)="addCategory()" [disabled]="disableEdit">
                 <mat-icon>add</mat-icon>
             </button>
             
@@ -41,7 +42,7 @@
                 type="submit"
                 [title]="budgetForm.valid ? 'Update' : 'Form data invalid'"
                 (click)="save()"
-                [disabled]='!budgetForm.valid'>
+                [disabled]='!budgetForm.valid || disableEdit'>
                 Save
             </button>
         </div>
