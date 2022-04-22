@@ -24,4 +24,8 @@ export class BudgetEditorComponent implements OnInit {
 
   }
 
+  budgetMonthSelected($event) {
+    console.log('Month selected event: ', $event)
+  }
+
 }

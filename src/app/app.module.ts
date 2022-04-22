@@ -16,10 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TransactionService } from './service/transaction/transaction.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BudgetEditorComponent } from './budget/budget-editor/budget-editor.component';
-import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit-table.component'
-
-
-
+import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit-table.component';
+import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +27,7 @@ import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit
     HomeComponent,
     BudgetEditorComponent,
     BudgetEditTableComponent,
+    DateMonthPickerComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -42,7 +41,9 @@ import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [TransactionService],
+  providers: [
+    TransactionService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
