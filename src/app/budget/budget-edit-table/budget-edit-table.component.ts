@@ -92,6 +92,7 @@ export class BudgetEditTableComponent implements OnInit {
       categories: this.formBuilder.array([])
     });;
 
+    this.budgetItems.sort((a, b) => a.category.localeCompare(b.category));
     this.budgetItems.forEach((transaction: Transaction) => {
       this.addCategory(transaction.category, transaction.amount, transaction.id);
     });
