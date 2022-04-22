@@ -1,14 +1,27 @@
-<app-date-month-picker (dateChanged)="budgetMonthSelected($event)"></app-date-month-picker>
-<div class="flex margin-32">
-    <div class="flex item border">
-        <span class="padding-16 bold">Budget Editor</span>
-        <app-budget-edit-table [budgetItems]="defaultBudgetItems"></app-budget-edit-table>
+<div class="flex-column margin-32 border">
+    <div class="flex border-bottom">
+        <div class="flex-column flex-item">
+            <span class="padding-16 bold">Budget Editor</span>
+            <app-date-month-picker (dateChanged)="budgetMonthSelected($event)"></app-date-month-picker>
+        </div>
+        <div class="flex-column flex-item border-left">
+            <span class="padding-16 bold">Default Budget</span>
+        </div>
+        <div class="flex-column flex-item border-left">
+            <span class="padding-16 bold">Budget Averages</span>
+            <app-date-range-picker (dateChanged)="budgetMonthSelected($event)"></app-date-range-picker>
+        </div>
     </div>
-    <div class="flex item border-excl-left flex-column">
-        <span class="padding-16 bold">Default Budget</span>
-        <app-budget-edit-table [budgetItems]="defaultBudgetItems"></app-budget-edit-table>
-    </div>
-    <div class="flex item border-excl-left">
-        <span class="padding-16 bold">Budget Averages</span>
+    <div class="flex">
+        <div class="flex-item">
+            <app-budget-edit-table [budgetItems]="defaultBudgetItems"></app-budget-edit-table>
+        </div>
+        <div class="flex-item border-left">
+            <app-budget-edit-table [budgetItems]="defaultBudgetItems"></app-budget-edit-table>
+        </div>
+        <div class="flex-item border-left">
+            <div>Placeholder</div>
+        </div>
+        
     </div>
 </div>

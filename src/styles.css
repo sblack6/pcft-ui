@@ -28,10 +28,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: solid 1px;
 }
 
-.border-excl-left {
-    border-top: solid 1px;
-    border-bottom: solid 1px;
-    border-right: solid 1px;
+.border-left {
+    border-left: solid 1px;
 }
 
 .border-bottom {
