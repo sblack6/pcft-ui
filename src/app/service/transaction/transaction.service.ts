@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from 'src/app/model/transaction';
+import { TYPE_DEFAULT_BUDGET } from 'src/app/shared/transaction-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class TransactionService {
   }
 
   getDefaultBudget() {
-    return this.http.get(`${this.transactions_url}/search?type=DEFAULT_BUDGET`)
+    return this.http.get(`${this.transactions_url}/search?type=${TYPE_DEFAULT_BUDGET}`)
   }
 
   uploadTransactions(source: string, file: File): Observable<any> {

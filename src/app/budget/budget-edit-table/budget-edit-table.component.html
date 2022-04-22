@@ -27,15 +27,23 @@
     </div>
 
 
-    <button mat-mini-fab (click)="addCategory()">
-        <mat-icon class="add-course-btn">add</mat-icon>
-    </button>
-
-    <button
-        type="submit"
-        [title]="budgetForm.valid ? 'Update' : 'Form data invalid'"
-        (click)="save()"
-        [disabled]='!budgetForm.valid'>
-        Save
-    </button>
+    <div class="button-container">
+        <div class="flex">
+            <button
+                (click)="onCopyDefaultBudget()"
+            >Copy Default Budget
+            </button>
+            <button mat-mini-fab (click)="addCategory()">
+                <mat-icon>add</mat-icon>
+            </button>
+            
+            <button
+                type="submit"
+                [title]="budgetForm.valid ? 'Update' : 'Form data invalid'"
+                (click)="save()"
+                [disabled]='!budgetForm.valid'>
+                Save
+            </button>
+        </div>
+    </div>
 </ng-container>

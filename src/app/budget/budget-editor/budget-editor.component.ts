@@ -10,8 +10,6 @@ import { TransactionService } from '../../service/transaction/transaction.servic
 })
 export class BudgetEditorComponent implements OnInit {
 
-  DEFAULT_BUDGET = TYPE_DEFAULT_BUDGET;
-  DEFAULT_DATE = DEFAULT_BUDGET_DATE;
   BUDGET = TYPE_BUDGET;
 
   budgetEditorMonth;

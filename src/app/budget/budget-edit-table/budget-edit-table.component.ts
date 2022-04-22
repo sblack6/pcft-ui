@@ -1,14 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
+import { DEFAULT_BUDGET_DATE, TYPE_DEFAULT_BUDGET } from 'src/app/shared/transaction-constants';
 
 @Component({
   selector: 'app-budget-edit-table',
   templateUrl: './budget-edit-table.component.html',
   styleUrls: ['./budget-edit-table.component.css']
 })
-export class BudgetEditTableComponent {
+export class BudgetEditTableComponent implements OnInit {
 
   /** The budget items to view/edit */
   budgetItems: Transaction[];
@@ -18,6 +19,8 @@ export class BudgetEditTableComponent {
 
   /** The type of budget items */
   _type: string;
+
+  @Input() isDefaultBudget = false;
 
   @Input() set type(value: string) {
     if (value) {
@@ -53,14 +56,34 @@ export class BudgetEditTableComponent {
 
   constructor(private formBuilder: FormBuilder, private transactionService: TransactionService) {}
 
+  ngOnInit(): void {
+    this.loadBudgetItems();
+  }
+
   /** Get budget items from the API for the input date and type */
   loadBudgetItems() {
-    if (this.type !== null && this.date !== null) {
+    if (this.isDefaultBudget) {
+      this._type = TYPE_DEFAULT_BUDGET;
+      this._date = DEFAULT_BUDGET_DATE;
+    }
+    if (this.type !== undefined && this.date !== undefined) {
       this.transactionService.search(this.date, this.date, this.type).subscribe((data: Transaction[]) => {
         this.budgetItems = data;
         this.initBudgetForm();
       });
     }
+  }
+
+  getDefaultBudget() {
+    this.transactionService.getDefaultBudget().subscribe((data: Transaction[]) => {
+      data.forEach(budgetItem => {
+        budgetItem.id = null;
+        budgetItem.date = this.date;
+        budgetItem.type = this.type;
+      });
+      this.budgetItems.push(...data);
+      this.initBudgetForm();
+    });
   }
 
   /** Initialize the edit form using the budget items retrieved from the API */
@@ -94,6 +117,7 @@ export class BudgetEditTableComponent {
       this.transactionService.delete(budgetItem.value.id).subscribe(data => console.log('Delete:', data));
     }
     this.categories.removeAt(index);
+    this.calculateTotal();
   }
 
   /** Re-calculate the total */
@@ -122,5 +146,9 @@ export class BudgetEditTableComponent {
       console.log('Saved budget items: ', data)
       this.loadBudgetItems();
     });
+  }
+
+  onCopyDefaultBudget() {
+    this.getDefaultBudget();
   }
 }
