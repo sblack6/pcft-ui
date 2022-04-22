@@ -1,39 +1,41 @@
-<div [formGroup]="budgetForm" class="padding-16">
-    <ng-container formArrayName="categories">
-        <div class="flex bold">
-            <div class="flex-item">Category</div>
-            <div class="flex-item">Amount</div>
-        </div>
-        <ng-container *ngFor="let categoryForm of categories.controls; let i = index">
-            <div class="flex" [formGroup]="categoryForm">
-                <mat-form-field class="flex-item" appearance="fill">
-                    <input matInput
-                        formControlName="name"
-                        placeholder="Category Name"
-                    >
-                </mat-form-field>
-                <mat-form-field class="flex-item" appearance="fill" class="padding-left-8">
-                    <input matInput type="number" formControlName="amount" placeholder="0" (change)="amountChange()">
-                </mat-form-field>
-                <mat-icon class="delete-btn padding-left-8" (click)="deleteCategory(i)">delete_forever</mat-icon>
+<ng-container *ngIf="budgetForm">
+    <div [formGroup]="budgetForm" class="padding-16">
+        <ng-container formArrayName="categories">
+            <div class="flex bold">
+                <div class="flex-item">Category</div>
+                <div class="flex-item">Amount</div>
+            </div>
+            <ng-container *ngFor="let categoryForm of categories.controls; let i = index">
+                <div class="flex" [formGroup]="categoryForm">
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <input matInput
+                            formControlName="name"
+                            placeholder="Category Name"
+                        >
+                    </mat-form-field>
+                    <mat-form-field class="flex-item" appearance="fill" class="padding-left-8">
+                        <input matInput type="number" formControlName="amount" placeholder="0" (change)="calculateTotal()">
+                    </mat-form-field>
+                    <mat-icon class="delete-btn padding-left-8" (click)="deleteCategory(i)">delete_forever</mat-icon>
+                </div>
+            </ng-container>
+            <div class="flex">
+                <div class="flex-item">Total</div>
+                <div class="flex-item">${{total}}</div>
             </div>
         </ng-container>
-        <div class="flex">
-            <div class="flex-item">Total</div>
-            <div class="flex-item">${{total}}</div>
-        </div>
-    </ng-container>
-</div>
+    </div>
 
 
-<button mat-mini-fab (click)="addCategory()">
-    <mat-icon class="add-course-btn">add</mat-icon>
-</button>
+    <button mat-mini-fab (click)="addCategory()">
+        <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
 
-<button
-    type="submit"
-    [title]="budgetForm.valid ? 'Update' : 'Form data invalid'"
-    (click)="save()"
-    [disabled]='!budgetForm.valid'>
-    Save
-</button>
+    <button
+        type="submit"
+        [title]="budgetForm.valid ? 'Update' : 'Form data invalid'"
+        (click)="save()"
+        [disabled]='!budgetForm.valid'>
+        Save
+    </button>
+</ng-container>

@@ -5,13 +5,13 @@
                 <span class="padding-16 bold">Budget Editor</span>
                 <app-date-month-picker (dateChanged)="budgetMonthSelected($event)"></app-date-month-picker>
             </div>
-            <app-budget-edit-table [budgetItems]="selectedMonthBudgetItems"></app-budget-edit-table>
+            <app-budget-edit-table [type]="BUDGET" [date]="budgetEditorMonth"></app-budget-edit-table>
         </div>
         <div class="flex-third border-left">
             <div class="header-height border-bottom">
                 <span class="padding-16 bold">Default Budget</span>
             </div>
-            <app-budget-edit-table [budgetItems]="defaultBudgetItems"></app-budget-edit-table>
+            <app-budget-edit-table [type]="DEFAULT_BUDGET" [date]="DEFAULT_DATE"></app-budget-edit-table>
         </div>
         <div class="flex-third border-left">
             <div class="header-height border-bottom flex-column">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TYPE_BUDGET } from 'src/app/shared/transaction-constants';
+import { DEFAULT_BUDGET_DATE, TYPE_BUDGET, TYPE_DEFAULT_BUDGET } from 'src/app/shared/transaction-constants';
 import { Transaction } from '../../model/transaction';
 import { TransactionService } from '../../service/transaction/transaction.service';
 
@@ -10,6 +10,11 @@ import { TransactionService } from '../../service/transaction/transaction.servic
 })
 export class BudgetEditorComponent implements OnInit {
 
+  DEFAULT_BUDGET = TYPE_DEFAULT_BUDGET;
+  DEFAULT_DATE = DEFAULT_BUDGET_DATE;
+  BUDGET = TYPE_BUDGET;
+
+  budgetEditorMonth;
   defaultBudgetItems: Transaction[];
 
   selectedMonthBudgetItems: Transaction[];
@@ -23,9 +28,7 @@ export class BudgetEditorComponent implements OnInit {
   }
 
   budgetMonthSelected($event) {
-    this.transactionService.search($event, $event, TYPE_BUDGET).subscribe((data: Transaction[]) => {
-      this.selectedMonthBudgetItems = data;
-    });
+    this.budgetEditorMonth = $event;
   }
 
   onDateRangeSelected($event) {
