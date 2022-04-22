@@ -99,8 +99,8 @@ export class BudgetEditTableComponent {
   /** Re-calculate the total */
   calculateTotal() {
     let sum = 0;
-    this.categories.getRawValue().forEach(item => {
-      sum += item.amount;
+    this.categories.controls.forEach(item => {
+      sum += item.value.amount;
     });
     this.total = sum;
   }
@@ -120,6 +120,7 @@ export class BudgetEditTableComponent {
     });
     this.transactionService.create(budgetItemsToSave).subscribe(data => {
       console.log('Saved budget items: ', data)
+      this.loadBudgetItems();
     });
   }
 }
