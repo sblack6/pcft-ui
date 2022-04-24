@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { GridReadyEvent } from 'ag-grid-community';
 import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
@@ -11,6 +12,8 @@ import { getMonthRange, sortTransactionsByCategory, sumTransactionsByMonthAndTyp
   styleUrls: ['./transaction-detail-table.component.css']
 })
 export class TransactionDetailTableComponent {
+
+  gridApi;
 
   isLoading = false;
 
@@ -62,7 +65,7 @@ export class TransactionDetailTableComponent {
           field: this.createColumnKey(month, type),
         });
       });
-    })
+    });
   }
 
   loadTransactionData() {
@@ -86,12 +89,17 @@ export class TransactionDetailTableComponent {
           const key = this.createColumnKey(month, type);
           rowEntry[key] = amount;
         });
-        rowEntry[this.createColumnKey(month ,'balance')] = typeToAmountMap.get(TYPE_BUDGET) - typeToAmountMap.get(TYPE_TRANSACTION);
+        rowEntry[this.createColumnKey(month ,'balance')] = typeToAmountMap.get(TYPE_BUDGET) + typeToAmountMap.get(TYPE_TRANSACTION);
       });
       rowData.push(rowEntry);
     });
 
     this.gridData = rowData;
+  }
+
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+    params.api.setRowData(this.gridData);
   }
 
 }

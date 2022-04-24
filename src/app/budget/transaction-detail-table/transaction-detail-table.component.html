@@ -6,5 +6,6 @@
         [columnDefs]="columnDefs"
         [enableRangeSelection]="true"
         [rowData]="rowData"
+        (gridReady)="onGridReady($event)"
     ></ag-grid-angular>
 </div>
