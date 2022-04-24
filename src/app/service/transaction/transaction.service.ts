@@ -54,7 +54,7 @@ export class TransactionService {
   uploadTransactions(source: string, file: File): Observable<any> {
     let formData: FormData = new FormData();
     formData.append("file", file);
-    return this.http.post(`${this.transactions_url}upload-transactions?source=${source}`, formData)
+    return this.http.post(`${this.transactions_url}/upload-transactions?source=${source}`, formData)
   }
 
 }

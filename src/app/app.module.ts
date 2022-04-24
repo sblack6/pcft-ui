@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TransactionService } from './service/transaction/transaction.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +20,11 @@ import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit
 import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.component';
 import { BudgetHomeComponent } from './budget/budget-home/budget-home.component';
 import { TransactionDetailTableComponent } from './budget/transaction-detail-table/transaction-detail-table.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -32,16 +37,21 @@ import { TransactionDetailTableComponent } from './budget/transaction-detail-tab
     DateMonthPickerComponent,
     BudgetHomeComponent,
     TransactionDetailTableComponent,
+    FileUploadComponent,
   ],
   imports: [
+    AgGridModule.withComponents([]),
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CommonModule,
+    FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatNativeDateModule,
+    MatSelectModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],

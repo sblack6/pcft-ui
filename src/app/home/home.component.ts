@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { DateRange } from '../date-picker/range/date-range-picker.component';
+import { TransactionService } from '../service/transaction/transaction.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent {
 
-  constructor() { }
+  dateRange: DateRange;
+
+  constructor(private transactionService: TransactionService) { }
 
   onDateChanged($event) {
-    // $event.start, $event.end
+    this.dateRange = $event;
+  }
+
+  uploadFile() {
+
   }
 }
