@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BudgetEditorComponent } from './budget/budget-editor/budget-editor.component';
 import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit-table.component';
 import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.component';
+import { BudgetHomeComponent } from './budget/budget-home/budget-home.component';
+import { TransactionDetailTableComponent } from './budget/transaction-detail-table/transaction-detail-table.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.
     BudgetEditorComponent,
     BudgetEditTableComponent,
     DateMonthPickerComponent,
+    BudgetHomeComponent,
+    TransactionDetailTableComponent,
   ],
   imports: [
     AppRoutingModule,
