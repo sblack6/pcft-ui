@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
 
 @Component({
   selector: 'app-budget-home',
   templateUrl: './budget-home.component.html',
   styleUrls: ['./budget-home.component.css']
 })
-export class BudgetHomeComponent implements OnInit {
+export class BudgetHomeComponent {
 
-  constructor() { }
+  dateRange: DateRange;
 
-  ngOnInit(): void {
+  onDateChanged($event: DateRange) {
+    this.dateRange = $event;
   }
-
 }

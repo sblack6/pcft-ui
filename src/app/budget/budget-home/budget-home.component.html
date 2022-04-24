@@ -1,1 +1,2 @@
-<app-transaction-detail-table></app-transaction-detail-table>
+<app-date-range-picker (dateChanged)="onDateChanged($event)"></app-date-range-picker>
+<app-transaction-detail-table [dateRange]="dateRange"></app-transaction-detail-table>

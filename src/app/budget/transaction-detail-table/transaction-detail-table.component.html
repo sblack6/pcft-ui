@@ -1,1 +1,10 @@
-<p>transaction-detail-table works!</p>
+<div style="height: 100vh; width: 100vw;">
+    <div *ngIf="isLoading">Loading...</div>
+    <ag-grid-angular *ngIf="!isLoading"
+        style="height: 90%; width: 95vw;"
+        class="ag-theme-alpine"
+        [columnDefs]="columnDefs"
+        [enableRangeSelection]="true"
+        [rowData]="rowData"
+    ></ag-grid-angular>
+</div>
