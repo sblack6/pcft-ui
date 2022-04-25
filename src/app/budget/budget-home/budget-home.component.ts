@@ -8,7 +8,10 @@ import { DateRange } from 'src/app/date-picker/range/date-range-picker.component
 })
 export class BudgetHomeComponent {
 
-  dateRange: DateRange;
+  dateRange: DateRange = {
+    start: '2020-12-01',
+    end: '2021-01-31'
+  };
 
   onDateChanged($event: DateRange) {
     this.dateRange = $event;
