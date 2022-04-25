@@ -9,3 +9,24 @@ export const ALL_TRANSACTION_TYPES = [TYPE_BUDGET, TYPE_DEFAULT_BUDGET, TYPE_INC
 export const SPEND_TRANSACTION_TYPES = [TYPE_BUDGET, TYPE_TRANSACTION];
 
 export const DEFAULT_BUDGET_DATE = "1970-01-01";
+
+export const typeNameMap = new Map([
+    ['BUDGET', 'Budget'],
+    ['TRANSACTION', 'Spend'],
+    ['balance', 'Net']
+  ]);
+
+export const monthNameMap = new Map([
+    ['01', 'Jan'],
+    ['02', 'Feb'],
+    ['03', 'Mar'],
+    ['04', 'Apr'],
+    ['05', 'May'],
+    ['06', 'Jun'],
+    ['07', 'Jul'],
+    ['08', 'Aug'],
+    ['09', 'Sep'],
+    ['10', 'Oct'],
+    ['11', 'Nov'],
+    ['12', 'Dec'],
+]);

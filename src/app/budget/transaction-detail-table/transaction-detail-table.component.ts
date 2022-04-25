@@ -4,8 +4,8 @@ import * as math from 'mathjs';
 import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
-import { SPEND_TRANSACTION_TYPES, TYPE_BUDGET, TYPE_TRANSACTION } from 'src/app/shared/transaction-constants';
-import { getMonthRange, sortTransactionsByCategory, sumTransactionsByMonthAndType } from 'src/app/shared/transaction-utility-functions';
+import { monthNameMap, SPEND_TRANSACTION_TYPES, typeNameMap, TYPE_BUDGET, TYPE_TRANSACTION } from 'src/app/shared/transaction-constants';
+import { getMonth, getMonthRange, sortTransactionsByCategory, sumTransactionsByMonthAndType } from 'src/app/shared/transaction-utility-functions';
 
 @Component({
   selector: 'app-transaction-detail-table',
@@ -29,8 +29,16 @@ export class TransactionDetailTableComponent {
   monthRange: string[];
 
   gridOptions = {
-    groupIncludeTotalFooter: true,
+    defaultColDef: {
+      resizable: true,
+    },
+    skipHeaderOnAutoSize: true
   };
+
+  dollarColumnDefs = {
+    valueFormatter: this.currencyFormatter,
+    cellStyle: this.cellHighlighter,
+  }
 
   columnDefs: any[] = [
     {
@@ -42,16 +50,19 @@ export class TransactionDetailTableComponent {
       headerName: 'Balance Mean',
       field: 'balance-mean',
       pinned: 'right',
+      ...this.dollarColumnDefs,
     },
     {
       headerName: 'Balance Median',
       field: 'balance-median',
       pinned: 'right',
+      ...this.dollarColumnDefs,
     },
     {
       headerName: 'Balance Total',
       field: 'balance-total',
       pinned: 'right',
+      ...this.dollarColumnDefs,
     },
   ];
 
@@ -61,7 +72,7 @@ export class TransactionDetailTableComponent {
     if (value) {
       this.isLoading = true;
       this._dateRange = value;
-      this.createGridHeaders();
+      this.createColumnDefs();
       this.loadTransactionData();
     }
   }
@@ -72,30 +83,31 @@ export class TransactionDetailTableComponent {
 
   constructor(private transactionService: TransactionService) { }
 
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+    this.gridApi.setRowData(this.gridData);
+    params.columnApi.autoSizeAllColumns();
+  }
+
   createColumnKey(month: string, type: string) {
     return month + '-' + type;
   }
 
   createColumnHeader(month: string, type: string) {
-    return month + ' ' + type;
+    return monthNameMap.get(getMonth(month)) + ' ' + typeNameMap.get(type);
   }
 
-  createGridHeaders() {
+  createColumnDefs() {
     this.monthRange = getMonthRange(this.dateRange);
     this.monthRange.forEach(month => {
       this.monthSubTypes.forEach(type => {
         this.columnDefs.push({
           headerName: this.createColumnHeader(month, type),
           field: this.createColumnKey(month, type),
+          ...this.dollarColumnDefs,
         });
       });
     });
-    console.log('Headers: ', this.columnDefs)
-  }
-
-  onGridReady(params: GridReadyEvent) {
-    this.gridApi = params.api;
-    params.api.setRowData(this.gridData);
   }
 
   loadTransactionData() {
@@ -130,9 +142,45 @@ export class TransactionDetailTableComponent {
       rowEntry['balance-median'] = math.median(balances);
       rowData.push(rowEntry);
     });
-
+    rowData.push(this.generateTotalRow(rowData));
 
     this.gridData = rowData;
+  }
+
+  generateTotalRow(rowData: any[]) {
+    const totalRow = {
+      category: 'Total'
+    };
+    Object.keys(rowData[0]).forEach(key => {
+      if (key !== 'category') {
+        totalRow[key] = rowData.map(row => row[key] ?? 0).reduce((partialSum, a) => partialSum + a, 0);
+      }
+    });
+    return totalRow;
+  }
+
+  currencyFormatter(params: any) {
+    if ( params && params.value) {
+      let stringFormat = params.value.toFixed(2);
+      if (stringFormat.indexOf('-') != -1 ) {
+        stringFormat = stringFormat.replace("-", "- $ ");
+      } else {
+        stringFormat = '$ ' + stringFormat;
+      }
+      return stringFormat;
+    }
+  }
+
+  cellHighlighter(params: any) {
+    if ( params.colDef.field.includes('balance')) {
+      if (params.value < 0) {
+        return {color: '#C70000'}
+      } else if (params.value > 0) {
+        return {color: '#15BF00'}
+      } else {
+        return {color: '#000000'}
+      }
+    }
   }
 
 }

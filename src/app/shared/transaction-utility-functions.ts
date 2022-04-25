@@ -71,7 +71,7 @@ function getMonthYear(date: string): string {
     }
 }
 
-function getMonth(date: string): string {
+export function getMonth(date: string): string {
     if (date && date.length >= 7) {
         return date.substring(5, 7);
     }
