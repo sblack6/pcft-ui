@@ -118,5 +118,5 @@ function iterateMonthYear(monthYear: string): string {
         month = 1;
         year++;
     }
-    return year.toString() + '-' + month.toString();
+    return year.toString() + '-' + ('0'+month).slice(-2);
 }
