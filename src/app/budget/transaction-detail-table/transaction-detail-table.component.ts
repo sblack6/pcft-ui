@@ -5,7 +5,7 @@ import { DateRange } from 'src/app/date-picker/range/date-range-picker.component
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
 import { monthNameMap, SPEND_TRANSACTION_TYPES, typeNameMap, TYPE_BUDGET, TYPE_TRANSACTION } from 'src/app/shared/transaction-constants';
-import { getMonth, getMonthRange, sortTransactionsByCategory, sumTransactionsByMonthAndType } from 'src/app/shared/transaction-utility-functions';
+import { getMonth, getMonthRange, getYear, sortTransactionsByCategory, sumTransactionsByMonthAndType } from 'src/app/shared/transaction-utility-functions';
 
 @Component({
   selector: 'app-transaction-detail-table',
@@ -47,23 +47,39 @@ export class TransactionDetailTableComponent {
       pinned: 'left',
     },
     {
-      headerName: 'Balance Mean',
-      field: 'balance-mean',
-      pinned: 'right',
-      ...this.dollarColumnDefs,
-    },
-    {
-      headerName: 'Balance Median',
-      field: 'balance-median',
-      pinned: 'right',
-      ...this.dollarColumnDefs,
-    },
-    {
-      headerName: 'Balance Total',
-      field: 'balance-total',
-      pinned: 'right',
-      ...this.dollarColumnDefs,
-    },
+      headerName: 'Balance',
+
+      children: [
+        {
+          headerName: 'Balance Mean',
+          field: 'balance-mean',
+          pinned: 'right',
+          columnGroupShow: 'open',
+          ...this.dollarColumnDefs,
+        },
+        {
+          headerName: 'Balance Median',
+          field: 'balance-median',
+          pinned: 'right',
+          columnGroupShow: 'open',
+          ...this.dollarColumnDefs,
+        },
+        {
+          headerName: 'Net Balance',
+          field: 'balance-total',
+          pinned: 'right',
+          columnGroupShow: 'open',
+          ...this.dollarColumnDefs,
+        },
+        {
+          headerName: 'Net Balance',
+          field: 'balance-total',
+          pinned: 'right',
+          columnGroupShow: 'closed',
+          ...this.dollarColumnDefs,
+        },
+      ]
+    }
   ];
 
   _dateRange: DateRange;
@@ -99,13 +115,25 @@ export class TransactionDetailTableComponent {
 
   createColumnDefs() {
     this.monthRange = getMonthRange(this.dateRange);
-    this.monthRange.forEach(month => {
-      this.monthSubTypes.forEach(type => {
-        this.columnDefs.push({
-          headerName: this.createColumnHeader(month, type),
-          field: this.createColumnKey(month, type),
-          ...this.dollarColumnDefs,
-        });
+    this.monthRange.forEach(monthYear => {
+      this.columnDefs.push({
+        headerName: monthNameMap.get(getMonth(monthYear)) + ' ' + getYear(monthYear),
+        children: [
+          {
+            headerName: this.createColumnHeader(monthYear, 'balance'),
+            field: this.createColumnKey(monthYear, 'balance'),
+            columnGroupShow: 'closed',
+            ...this.dollarColumnDefs,
+          },
+          ...this.monthSubTypes.map(type => {
+            return {
+              headerName: this.createColumnHeader(monthYear, type),
+              field: this.createColumnKey(monthYear, type),
+              columnGroupShow: 'open',
+              ...this.dollarColumnDefs,
+            }
+          })
+        ]
       });
     });
   }
