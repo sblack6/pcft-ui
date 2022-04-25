@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GridReadyEvent } from 'ag-grid-community';
+import * as math from 'mathjs';
 import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
@@ -25,11 +26,34 @@ export class TransactionDetailTableComponent {
 
   monthSubTypes = [...this.gridTransactionTypes, 'balance'];
 
-  columnDefs: any[] = [{
-    headerName: 'Category',
-    field: 'category',
-    pinned: 'left',
-  }];
+  monthRange: string[];
+
+  gridOptions = {
+    groupIncludeTotalFooter: true,
+  };
+
+  columnDefs: any[] = [
+    {
+      headerName: 'Category',
+      field: 'category',
+      pinned: 'left',
+    },
+    {
+      headerName: 'Balance Mean',
+      field: 'balance-mean',
+      pinned: 'right',
+    },
+    {
+      headerName: 'Balance Median',
+      field: 'balance-median',
+      pinned: 'right',
+    },
+    {
+      headerName: 'Balance Total',
+      field: 'balance-total',
+      pinned: 'right',
+    },
+  ];
 
   _dateRange: DateRange;
 
@@ -57,8 +81,8 @@ export class TransactionDetailTableComponent {
   }
 
   createGridHeaders() {
-    const monthRange = getMonthRange(this.dateRange);
-    monthRange.forEach(month => {
+    this.monthRange = getMonthRange(this.dateRange);
+    this.monthRange.forEach(month => {
       this.monthSubTypes.forEach(type => {
         this.columnDefs.push({
           headerName: this.createColumnHeader(month, type),
@@ -66,6 +90,12 @@ export class TransactionDetailTableComponent {
         });
       });
     });
+    console.log('Headers: ', this.columnDefs)
+  }
+
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+    params.api.setRowData(this.gridData);
   }
 
   loadTransactionData() {
@@ -78,28 +108,31 @@ export class TransactionDetailTableComponent {
 
   initTransactionGridData() {
     const rowData = [];
+
     const categoryMap = sortTransactionsByCategory(this.transactionsData);
     Array.from(categoryMap.entries()).forEach(([category, transactions]) => {
       const rowEntry = {
         category: category,
       };
       const monthToTypeToAmountMap = sumTransactionsByMonthAndType(transactions, this.gridTransactionTypes);
+      const balances: number[] = [];
       Array.from(monthToTypeToAmountMap.entries()).forEach(([month, typeToAmountMap]) => {
         Array.from(typeToAmountMap.entries()).forEach(([type, amount]) => {
           const key = this.createColumnKey(month, type);
           rowEntry[key] = amount;
         });
-        rowEntry[this.createColumnKey(month ,'balance')] = typeToAmountMap.get(TYPE_BUDGET) + typeToAmountMap.get(TYPE_TRANSACTION);
+        const balance = typeToAmountMap.get(TYPE_BUDGET) + typeToAmountMap.get(TYPE_TRANSACTION);
+        rowEntry[this.createColumnKey(month ,'balance')] = balance;
+        balances.push(balance);
       });
+      rowEntry['balance-total'] = balances.reduce((partialSum, a) => partialSum + a, 0);
+      rowEntry['balance-mean'] = rowEntry['balance-total'] / this.monthRange.length;
+      rowEntry['balance-median'] = math.median(balances);
       rowData.push(rowEntry);
     });
 
-    this.gridData = rowData;
-  }
 
-  onGridReady(params: GridReadyEvent) {
-    this.gridApi = params.api;
-    params.api.setRowData(this.gridData);
+    this.gridData = rowData;
   }
 
 }

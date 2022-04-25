@@ -3,6 +3,7 @@
     <ag-grid-angular *ngIf="!isLoading"
         style="height: 90%; width: 95vw;"
         class="ag-theme-alpine"
+        [gridOptions]="gridOptions"
         [columnDefs]="columnDefs"
         [enableRangeSelection]="true"
         [rowData]="rowData"
