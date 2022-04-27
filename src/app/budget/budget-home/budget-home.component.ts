@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
+import { DEFAULT_DATE_RANGE } from 'src/app/shared/transaction-constants';
 
 @Component({
   selector: 'app-budget-home',
@@ -8,10 +9,7 @@ import { DateRange } from 'src/app/date-picker/range/date-range-picker.component
 })
 export class BudgetHomeComponent {
 
-  dateRange: DateRange = {
-    start: '2020-12-01',
-    end: '2021-01-31'
-  };
+  dateRange: DateRange = DEFAULT_DATE_RANGE;
 
   onDateChanged($event: DateRange) {
     this.dateRange = $event;

@@ -117,6 +117,14 @@ export class TransactionDetailTableComponent {
   }
 
   createColumnDefs() {
+    if (this.isAbridged) {
+      this.createSummaryColumnDefs();
+    } else {
+      this.createMonthColumnDefs();
+    }
+  }
+
+  createMonthColumnDefs() {
     this.monthRange.forEach(monthYear => {
       this.columnDefs.push({
         headerName: monthNameMap.get(getMonth(monthYear)) + ' ' + getYear(monthYear),
@@ -138,7 +146,6 @@ export class TransactionDetailTableComponent {
         ]
       });
     });
-    this.createSummaryColumnDefs();
   }
 
   createSummaryColumnDefs() {

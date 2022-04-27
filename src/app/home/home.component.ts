@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DateRange } from '../date-picker/range/date-range-picker.component';
 import { TransactionService } from '../service/transaction/transaction.service';
+import { DEFAULT_DATE_RANGE } from '../shared/transaction-constants';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { TransactionService } from '../service/transaction/transaction.service';
 })
 export class HomeComponent {
 
-  dateRange: DateRange;
+  dateRange: DateRange = DEFAULT_DATE_RANGE;
 
   constructor(private transactionService: TransactionService) { }
 

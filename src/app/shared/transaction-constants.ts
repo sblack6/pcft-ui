@@ -30,3 +30,8 @@ export const monthNameMap = new Map([
     ['11', 'Nov'],
     ['12', 'Dec'],
 ]);
+
+export const DEFAULT_DATE_RANGE = {
+    start: '2020-12-01',
+    end: '2021-01-31'
+};

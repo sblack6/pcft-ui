@@ -8,5 +8,10 @@
             (dateChanged)="onDateChanged($event)"
         ></app-date-range-picker>
     </div>
-    <div class="padding-16">placeholder text</div>
+    <div class="padding-16 flex">
+        <div style="height: 50vh; width: 50vw;">
+            <app-transaction-detail-table class="flex-item" [isAbridged]="true" [dateRange]="dateRange"></app-transaction-detail-table>
+        </div>
+        <div class="flex-item"> Placeholder Text </div>
+    </div>
 </div>
