@@ -1,5 +1,97 @@
+import * as math from "mathjs";
 import { DateRange } from "../date-picker/range/date-range-picker.component";
 import { Transaction } from "../model/transaction";
+
+export function findAllCategories(transactions: Transaction[]) {
+    const categories: Set<string> = new Set();
+    transactions.forEach(transaction => categories.add(transaction.category));
+    return categories;
+}
+
+export function convertTransactionsToRows(transactions: Transaction[], categories: Set<string>, months: string[], types: string[]): any[] {
+    const rows = [];
+    categories.forEach(category => {
+        const row = { 'category': category };
+        months.forEach(month => {
+            types.forEach(type => {
+                const amount = transactions.filter(transaction => 
+                    transaction.category === category &&
+                    getMonthYear(transaction.date)=== month &&
+                    transaction.type === type
+                ).map(
+                    transaction => transaction.amount
+                ).reduce((partialSum, a) => partialSum + a, 0);
+
+                row[month + type] = amount;
+                row[month + 'balance'] = amount + (row[month+'balance'] ?? 0);
+            });
+        });
+        rows.push(row);
+    });
+    return rows;
+}
+
+export function getRowMeasuresForType(rows, types: string[], numMonths: number) {
+    rows.forEach((row, index) => {
+        types.forEach(type => {
+            let values = [];
+            Object.entries(row).forEach(([key, value]) => {
+                if (key.includes(type)) {
+                    values.push(value);
+                }
+            });
+            row[type+'net'] = math.sum(...values);
+            row[type+'mean'] = math.sum(...values) / numMonths;
+            row[type+'median'] = math.median(...values);
+            rows[index] = row;
+        });
+    });
+    return rows;
+}
+
+export function mapTransactionAmountByCategoryToTypeToMonth(transactions: Transaction[], categories: string[], monthYears: string[], types: string[]): Map<string, Map<string, Map<string, number>>> {
+    const categoryToTypeToMonthToAmountMap: Map<string, Map<string, Map<string, number>>> = new Map();
+    categories.forEach(category => {
+        const typeToMonthToAmountMap: Map<string, Map<string, number>> = new Map();
+        types.forEach(type => {
+            const monthToAmountMap: Map<string, number> = new Map();
+            monthYears.forEach(monthYear => {
+                const filteredTransactions = transactions.filter(transaction => 
+                        transaction.category === category && 
+                        getMonthYear(transaction.date) === monthYear && 
+                        transaction.type === type
+                ).map(
+                    transaction => transaction.amount
+                ).reduce(
+                    (partialSum, a) => partialSum + a, 0
+                );
+                monthToAmountMap.set(monthYear, filteredTransactions);
+            });
+            typeToMonthToAmountMap.set(type, monthToAmountMap);
+        })
+        categoryToTypeToMonthToAmountMap.set(category, typeToMonthToAmountMap);
+    });
+    return categoryToTypeToMonthToAmountMap;
+}
+
+export function getCategoryMeasuresByType(categoryMap: Map<string, Map<string, Map<string, number>>>, types: string[]) {
+    const rows = [];
+    Array.from(categoryMap.entries()).forEach(([category, typeMap]) => {
+        const row = {
+            category: category,
+        };
+        types.forEach(type => {
+            const monthMap = typeMap.get(type);
+            const values = Array.from(monthMap.values());
+            const total = values.reduce((partialSum, a) => partialSum + a, 0);
+            row[type + '-total'] = total;
+            row[type + '-mean'] = total / values.length;
+            row[type + '-median'] = math.median(...values);
+            rows.push(row);
+        });
+    });
+    return rows;
+}
 
 export function sortTransactionsByCategory(transactions: Transaction[]): Map<string, Transaction[]> {
     const categoryMap: Map<string, Transaction[]> = new Map();
@@ -65,7 +157,7 @@ export function meanAmountByCategory(transactions: Transaction[], startDate: str
     return meanTransactions;
 }
 
-function getMonthYear(date: string): string {
+export function getMonthYear(date: string): string {
     if (date && date.length == 10) {
         return date.substring(0, 7);
     }
