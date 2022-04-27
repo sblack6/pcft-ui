@@ -26,8 +26,6 @@ export class TransactionDetailTableComponent {
 
   gridTransactionTypes = SPEND_TRANSACTION_TYPES;
 
-
-
   monthSubTypes = [...this.gridTransactionTypes, BALANCE];
 
   monthRange: string[];
@@ -85,8 +83,6 @@ export class TransactionDetailTableComponent {
     }
   ];
 
-
-
   _dateRange: DateRange;
 
   @Input() isAbridged = false;
@@ -106,7 +102,7 @@ export class TransactionDetailTableComponent {
   }
 
   constructor(private transactionService: TransactionService) { }
-
+  
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
     this.gridApi.setRowData(this.gridData);
@@ -184,8 +180,8 @@ export class TransactionDetailTableComponent {
   initTransactionGridData() {
     const categories = findAllCategories(this.transactionsData);
     let rowData: any[] = convertTransactionsToRows(this.transactionsData, categories, this.monthRange, this.gridTransactionTypes);
-    rowData.push(this.generateTotalRow(rowData));
     const measureTypes = this.isAbridged ? this.monthSubTypes : [BALANCE];
+    rowData.push(this.generateTotalRow(rowData));
     rowData = getRowMeasuresForType(rowData, measureTypes, this.monthRange.length);
     this.gridData = rowData;
   }
