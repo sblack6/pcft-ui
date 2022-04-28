@@ -24,6 +24,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { TransactionsTimeSeriesChartComponent } from './budget/transactions-time-series-chart/transactions-time-series-chart.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { CommonModule } from '@angular/common';
     BudgetHomeComponent,
     TransactionDetailTableComponent,
     FileUploadComponent,
+    TransactionsTimeSeriesChartComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
@@ -46,6 +49,7 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     CommonModule,
     FormsModule,
+    HighchartsChartModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatIconModule,
