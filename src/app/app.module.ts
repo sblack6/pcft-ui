@@ -26,6 +26,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { TransactionsTimeSeriesChartComponent } from './components/budget/transactions-time-series-chart/transactions-time-series-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { TagOverviewComponent } from './components/tags/tag-overview/tag-overview.component';
+import { TagHomeComponent } from './components/tags/tag-home/tag-home.component';
+import { TagDetailComponent } from './components/tags/tag-detail/tag-detail.component';
 
 
 @NgModule({
@@ -41,6 +44,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     TransactionDetailTableComponent,
     FileUploadComponent,
     TransactionsTimeSeriesChartComponent,
+    TagOverviewComponent,
+    TagHomeComponent,
+    TagDetailComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
