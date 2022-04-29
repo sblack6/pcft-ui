@@ -11,9 +11,21 @@ export function findAllCategories(transactions: Transaction[]) {
 export function findAllTags(transactions: Transaction[]): Set<string> {
     const tagSet: Set<string> = new Set();
     transactions.forEach(transaction => {
-        transaction.tags.split(',').forEach(tag => tagSet.add(tag));
+        if (transaction.tags) {
+            transaction.tags.split(',').forEach(tag => tagSet.add(tag));
+        }
     });
     return tagSet;
+}
+
+export function includesTag(transaction: Transaction, tag: string) {
+    let containsTag = false;
+    if (tag != null && tag != '' && transaction.tags) {
+        containsTag = transaction.tags.toLocaleLowerCase().includes(tag.toLocaleLowerCase());
+    } else if (tag === '') {
+        containsTag = transaction.tags === null || transaction.tags === '';
+    }
+    return containsTag;
 }
 
 export function convertTransactionsToRows(transactions: Transaction[], categories: Set<string>, months: string[], types: string[]): any[] {
