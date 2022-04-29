@@ -91,7 +91,6 @@ export class TransactionsTimeSeriesChartComponent {
   }
 
   populateChartData() {
-    // TODO: format transactions data for the category chart.
     const transactionsForCategory = this.transactionsData.filter(transaction => transaction.category === this.categorySelected);
     const series = [];
     SPEND_TRANSACTION_TYPES.forEach(type => {
