@@ -29,6 +29,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { TagOverviewComponent } from './components/tags/tag-overview/tag-overview.component';
 import { TagHomeComponent } from './components/tags/tag-home/tag-home.component';
 import { TagDetailComponent } from './components/tags/tag-detail/tag-detail.component';
+import { CategoryTagDetailComponent } from './components/tags/category-tag-detail/category-tag-detail.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { TagDetailComponent } from './components/tags/tag-detail/tag-detail.comp
     TagOverviewComponent,
     TagHomeComponent,
     TagDetailComponent,
+    CategoryTagDetailComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
