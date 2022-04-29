@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BudgetEditorComponent } from './components/budget/budget-editor/budget-editor.component';
 import { BudgetHomeComponent } from './components/budget/budget-home/budget-home.component';
+import { TagHomeComponent } from './components/tags/tag-home/tag-home.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -9,6 +10,7 @@ const routes: Routes = [
   // Add new paths here (order matters)
   { path: 'budget', component: BudgetHomeComponent },
   { path: 'edit-budget', component: BudgetEditorComponent },
+  { path: 'tags', component: TagHomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

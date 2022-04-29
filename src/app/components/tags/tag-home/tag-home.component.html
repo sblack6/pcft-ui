@@ -1,1 +1,13 @@
-<p>tag-home works!</p>
+<div class="margin-32 border">
+    <div class="widget-title border-bottom">
+        <span class="widget-title-font padding-16">Tag Home</span>
+        <app-date-range-picker
+            class="flex-align-right padding-8 paddin-right-16"
+            (dateChanged)="onDateChanged($event)"
+        ></app-date-range-picker>
+    </div>
+    <div class="flex">
+        <app-tag-detail class="flex-item padding-16"></app-tag-detail>
+        <app-category-tag-detail class="flex-item padding-16"></app-category-tag-detail>
+    </div>
+</div>
