@@ -4,10 +4,9 @@ import { DateRange } from 'src/app/components/date-picker/range/date-range-picke
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
 import { getMonth, getMonthRange, getYear } from 'src/app/shared/date-utility-functions';
-import { monthNameMap, SPEND_TRANSACTION_TYPES, typeNameMap } from 'src/app/shared/transaction-constants';
+import { cellHighlighter, currencyFormatter } from 'src/app/shared/grid-utility-functions';
+import { BALANCE, monthNameMap, SPEND_TRANSACTION_TYPES, typeNameMap } from 'src/app/shared/transaction-constants';
 import { convertTransactionsToRows, findAllCategories, getRowMeasuresForType } from 'src/app/shared/transaction-utility-functions';
-
-const BALANCE = 'balance';
 
 @Component({
   selector: 'app-transaction-detail-table',
@@ -38,8 +37,8 @@ export class TransactionDetailTableComponent {
   };
 
   dollarColumnDefs = {
-    valueFormatter: this.currencyFormatter,
-    cellStyle: this.cellHighlighter,
+    valueFormatter: currencyFormatter,
+    cellStyle: cellHighlighter,
   }
 
   columnDefs: any[] = [
@@ -196,30 +195,6 @@ export class TransactionDetailTableComponent {
       }
     });
     return totalRow;
-  }
-
-  currencyFormatter(params: any) {
-    if ( params && params.value) {
-      let stringFormat = params.value.toFixed(2);
-      if (stringFormat.indexOf('-') != -1 ) {
-        stringFormat = stringFormat.replace("-", "- $ ");
-      } else {
-        stringFormat = '$ ' + stringFormat;
-      }
-      return stringFormat;
-    }
-  }
-
-  cellHighlighter(params: any) {
-    if ( params.colDef.field.includes(BALANCE)) {
-      if (params.value < 0) {
-        return {color: '#C70000'}
-      } else if (params.value > 0) {
-        return {color: '#15BF00'}
-      } else {
-        return {color: '#000000'}
-      }
-    }
   }
 
 }

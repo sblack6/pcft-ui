@@ -8,6 +8,14 @@ export function findAllCategories(transactions: Transaction[]) {
     return categories;
 }
 
+export function findAllTags(transactions: Transaction[]): Set<string> {
+    const tagSet: Set<string> = new Set();
+    transactions.forEach(transaction => {
+        transaction.tags.split(',').forEach(tag => tagSet.add(tag));
+    });
+    return tagSet;
+}
+
 export function convertTransactionsToRows(transactions: Transaction[], categories: Set<string>, months: string[], types: string[]): any[] {
     const rows = [];
     categories.forEach(category => {

@@ -1,1 +1,12 @@
-<p>tag-overview works!</p>
+<div style="height: 100%; width: 100%;">
+    <div *ngIf="isLoading">Loading...</div>
+    <ag-grid-angular *ngIf="!isLoading"
+        style="height: 90%; width: 95%;"
+        class="ag-theme-alpine"
+        [gridOptions]="gridOptions"
+        [columnDefs]="columnDefs"
+        [enableRangeSelection]="true"
+        [rowData]="rowData"
+        (gridReady)="onGridReady($event)"
+    ></ag-grid-angular>
+</div>
