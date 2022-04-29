@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { DateRangePickerComponent } from './date-picker/range/date-range-picker.component';
+import { HeaderComponent } from './components/header/header.component';
+import { DateRangePickerComponent } from './components/date-picker/range/date-range-picker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input'
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,16 +15,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TransactionService } from './service/transaction/transaction.service';
 import { HttpClientModule } from '@angular/common/http';
-import { BudgetEditorComponent } from './budget/budget-editor/budget-editor.component';
-import { BudgetEditTableComponent } from './budget/budget-edit-table/budget-edit-table.component';
-import { DateMonthPickerComponent } from './date-picker/month/date-month-picker.component';
-import { BudgetHomeComponent } from './budget/budget-home/budget-home.component';
-import { TransactionDetailTableComponent } from './budget/transaction-detail-table/transaction-detail-table.component';
+import { BudgetEditorComponent } from './components/budget/budget-editor/budget-editor.component';
+import { BudgetEditTableComponent } from './components/budget/budget-edit-table/budget-edit-table.component';
+import { DateMonthPickerComponent } from './components/date-picker/month/date-month-picker.component';
+import { BudgetHomeComponent } from './components/budget/budget-home/budget-home.component';
+import { TransactionDetailTableComponent } from './components/budget/transaction-detail-table/transaction-detail-table.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-import { TransactionsTimeSeriesChartComponent } from './budget/transactions-time-series-chart/transactions-time-series-chart.component';
+import { TransactionsTimeSeriesChartComponent } from './components/budget/transactions-time-series-chart/transactions-time-series-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BudgetEditorComponent } from './budget/budget-editor/budget-editor.component';
-import { BudgetHomeComponent } from './budget/budget-home/budget-home.component';
+import { BudgetEditorComponent } from './components/budget/budget-editor/budget-editor.component';
+import { BudgetHomeComponent } from './components/budget/budget-home/budget-home.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [

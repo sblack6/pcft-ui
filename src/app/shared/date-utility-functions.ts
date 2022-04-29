@@ -1,4 +1,4 @@
-import { DateRange } from "../date-picker/range/date-range-picker.component";
+import { DateRange } from "../components/date-picker/range/date-range-picker.component";
 
 export function getMonthYear(date: string): string {
     if (date && date.length == 10) {

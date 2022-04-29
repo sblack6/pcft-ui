@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
+import { DateRange } from 'src/app/components/date-picker/range/date-range-picker.component';
 import { TYPE_BUDGET } from 'src/app/shared/transaction-constants';
 import { meanAmountByCategory } from 'src/app/shared/transaction-utility-functions';
-import { Transaction } from '../../model/transaction';
-import { TransactionService } from '../../service/transaction/transaction.service';
+import { Transaction } from '../../../model/transaction';
+import { TransactionService } from '../../../service/transaction/transaction.service';
 
 @Component({
   selector: 'app-budget-editor',

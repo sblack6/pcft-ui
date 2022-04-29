@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GridReadyEvent } from 'ag-grid-community';
-import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
+import { DateRange } from 'src/app/components/date-picker/range/date-range-picker.component';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
 import { getMonth, getMonthRange, getYear } from 'src/app/shared/date-utility-functions';

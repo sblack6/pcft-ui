@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { DateRange } from 'src/app/date-picker/range/date-range-picker.component';
+import { DateRange } from 'src/app/components/date-picker/range/date-range-picker.component';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
 import { Transaction } from 'src/app/model/transaction';
 import { findAllCategories } from 'src/app/shared/transaction-utility-functions';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateRange } from '../date-picker/range/date-range-picker.component';
+import { DateRange } from '../components/date-picker/range/date-range-picker.component';
 import { TransactionService } from '../service/transaction/transaction.service';
 import { DEFAULT_DATE_RANGE } from '../shared/transaction-constants';
 

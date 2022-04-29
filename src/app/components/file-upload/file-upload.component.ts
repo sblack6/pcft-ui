@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TransactionService } from '../service/transaction/transaction.service';
+import { TransactionService } from '../../service/transaction/transaction.service';
 
 @Component({
   selector: 'app-file-upload',
