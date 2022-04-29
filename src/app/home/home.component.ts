@@ -12,13 +12,7 @@ export class HomeComponent {
 
   dateRange: DateRange = DEFAULT_DATE_RANGE;
 
-  constructor(private transactionService: TransactionService) { }
-
   onDateChanged($event) {
     this.dateRange = $event;
-  }
-
-  uploadFile() {
-
   }
 }
