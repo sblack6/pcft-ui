@@ -19,8 +19,6 @@ export class CategoryTagDetailComponent {
   chartOptions: Highcharts.Options;
 
   series;
-  
-  updateFlag = false;
 
   defaultOptions: Highcharts.Options = {
     chart: {
