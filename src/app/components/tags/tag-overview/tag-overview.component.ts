@@ -81,7 +81,7 @@ export class TagOverviewComponent {
     const tags = findAllTags(this.transactionsData);
     tags.forEach(tag => {
       const tagAmt = this.transactionsData
-        .filter(transaction => transaction.tags.includes(tag))
+        .filter(transaction => transaction.tags && transaction.tags.includes(tag))
         .map(transaction => transaction.amount)
         .reduce((partialSum, a) => partialSum + a, 0);
       rows.push({
