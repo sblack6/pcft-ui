@@ -28,8 +28,9 @@ import { TransactionsTimeSeriesChartComponent } from './components/budget/transa
 import { HighchartsChartModule } from 'highcharts-angular';
 import { TagOverviewComponent } from './components/tags/tag-overview/tag-overview.component';
 import { TagHomeComponent } from './components/tags/tag-home/tag-home.component';
-import { TagDetailComponent } from './components/tags/tag-detail/tag-detail.component';
 import { CategoryTagDetailComponent } from './components/tags/category-tag-detail/category-tag-detail.component';
+import { TagDetailTableComponent } from './components/tags/tag-detail-table/tag-detail-table.component';
+import { TagDetailChartComponent } from './components/tags/tag-detail-chart/tag-detail-chart.component';
 
 
 @NgModule({
@@ -47,8 +48,9 @@ import { CategoryTagDetailComponent } from './components/tags/category-tag-detai
     TransactionsTimeSeriesChartComponent,
     TagOverviewComponent,
     TagHomeComponent,
-    TagDetailComponent,
     CategoryTagDetailComponent,
+    TagDetailTableComponent,
+    TagDetailChartComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
