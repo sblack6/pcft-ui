@@ -95,7 +95,6 @@ export class CategoryTagDetailComponent {
     this.transactionService.search(this.dateRange.start, this.dateRange.end).subscribe((data: Transaction[]) => {
       this.allTransactions = data;
       this.populateCategoryOptions();
-      this.populateChartData();
       this.isLoading = false;
     });
   }
