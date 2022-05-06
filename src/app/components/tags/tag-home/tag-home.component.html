@@ -7,7 +7,10 @@
         ></app-date-range-picker>
     </div>
     <div class="flex">
-        <app-tag-detail-chart class="flex-item padding-16"></app-tag-detail-chart>
+        <div class="flex-column padding-16">
+            <app-transaction-selector [transactions]="transactions" [type]="tagType" (optionSelected)="onTagChanged($event)"></app-transaction-selector>
+            <app-tag-detail-table class="flex-item" [transactions]="transactions" [tagSelected]="tagSelected"></app-tag-detail-table>
+        </div>
         <div class="flex-column padding-16">
             <app-transaction-selector class="flex-item" [transactions]="transactions" [type]="categoryType" (optionSelected)="onCategoryChanged($event)"></app-transaction-selector>
             <app-category-tag-detail class="flex-item" [dateRange]="dateRange" [transactions]="transactions" [categorySelected]="categorySelected"></app-category-tag-detail>

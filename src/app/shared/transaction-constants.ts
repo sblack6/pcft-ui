@@ -43,3 +43,9 @@ export const DEFAULT_DATE_RANGE = {
     start: '2020-12-01',
     end: '2021-01-31'
 };
+
+// TODO: temporary date range for testing.
+export const TAG_DATE_RANGE = {
+    start: '2022-03-01',
+    end: '2022-04-30'
+};

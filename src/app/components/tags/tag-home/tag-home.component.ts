@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction/transaction.service';
-import { DEFAULT_DATE_RANGE, FIELD_CATEGORY } from 'src/app/shared/transaction-constants';
+import { DEFAULT_DATE_RANGE, FIELD_CATEGORY, FIELD_TAGS, TAG_DATE_RANGE } from 'src/app/shared/transaction-constants';
 
 @Component({
   selector: 'app-tag-home',
@@ -11,12 +11,14 @@ import { DEFAULT_DATE_RANGE, FIELD_CATEGORY } from 'src/app/shared/transaction-c
 export class TagHomeComponent implements OnInit {
 
   categoryType = FIELD_CATEGORY;
+  tagType = FIELD_TAGS;
 
   transactions: Transaction[];
 
-  dateRange = DEFAULT_DATE_RANGE;
+  dateRange = TAG_DATE_RANGE;
 
   categorySelected: string;
+  tagSelected: string;
 
   constructor(private transactionService: TransactionService) {}
 
@@ -37,6 +39,10 @@ export class TagHomeComponent implements OnInit {
 
   onCategoryChanged($event) {
     this.categorySelected = $event;
+  }
+
+  onTagChanged($event) {
+    this.tagSelected = $event;
   }
 
 }
