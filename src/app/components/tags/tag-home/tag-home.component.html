@@ -8,6 +8,9 @@
     </div>
     <div class="flex">
         <app-tag-detail-chart class="flex-item padding-16"></app-tag-detail-chart>
-        <app-category-tag-detail class="flex-item padding-16" [dateRange]="dateRange"></app-category-tag-detail>
+        <div class="flex-column padding-16">
+            <app-transaction-selector class="flex-item" [transactions]="transactions" [type]="categoryType" (optionSelected)="onCategoryChanged($event)"></app-transaction-selector>
+            <app-category-tag-detail class="flex-item" [dateRange]="dateRange" [transactions]="transactions" [categorySelected]="categorySelected"></app-category-tag-detail>
+        </div>
     </div>
 </div>
