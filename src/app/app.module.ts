@@ -30,7 +30,6 @@ import { TagOverviewComponent } from './components/tags/tag-overview/tag-overvie
 import { TagHomeComponent } from './components/tags/tag-home/tag-home.component';
 import { CategoryTagDetailComponent } from './components/tags/category-tag-detail/category-tag-detail.component';
 import { TagDetailTableComponent } from './components/tags/tag-detail-table/tag-detail-table.component';
-import { TagDetailChartComponent } from './components/tags/tag-detail-chart/tag-detail-chart.component';
 import { TransactionSelectorComponent } from './components/selector/transaction-selector.component';
 
 
@@ -51,7 +50,6 @@ import { TransactionSelectorComponent } from './components/selector/transaction-
     TagHomeComponent,
     CategoryTagDetailComponent,
     TagDetailTableComponent,
-    TagDetailChartComponent,
     TransactionSelectorComponent,
   ],
   imports: [
