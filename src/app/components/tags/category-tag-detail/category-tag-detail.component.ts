@@ -142,6 +142,5 @@ export class CategoryTagDetailComponent {
       ...this.defaultOptions,
       series: this.series,
     }
-    console.log('Chart options: ', this.chartOptions)
   }
 }
