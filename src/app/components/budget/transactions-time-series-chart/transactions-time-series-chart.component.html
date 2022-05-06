@@ -1,12 +1,4 @@
 
-<mat-form-field>
-    <mat-label>Category</mat-label>
-    <mat-select [(ngModel)]="categorySelected">
-        <mat-option *ngFor="let category of categoryOptions" [value]="category.value">
-            {{ category.label }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
 <highcharts-chart
    [Highcharts] = "highcharts" 
    [options] = "chartOptions">

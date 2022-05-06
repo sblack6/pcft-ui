@@ -1,3 +1,4 @@
+/* Transaction Type enum values */
 export const TYPE_BUDGET = 'BUDGET';
 export const TYPE_DEFAULT_BUDGET = 'DEFAULT_BUDGET';
 export const TYPE_INCOME = 'INCOME';
@@ -6,9 +7,14 @@ export const TYPE_TRANSACTION = 'TRANSACTION';
 export const BALANCE = 'balance';
 
 export const ALL_TRANSACTION_TYPES = [TYPE_BUDGET, TYPE_DEFAULT_BUDGET, TYPE_INCOME, TYPE_SAVINGS, TYPE_TRANSACTION];
-
+/** Transaction types associated with spending & budgeting */
 export const SPEND_TRANSACTION_TYPES = [TYPE_BUDGET, TYPE_TRANSACTION];
 
+/* Fields of the transaction type */
+export const FIELD_CATEGORY = 'Category';
+export const FIELD_TAGS = 'Tag';
+
+/** Date assigned to 'Default Budget' items */
 export const DEFAULT_BUDGET_DATE = "1970-01-01";
 
 export const typeNameMap = new Map([
@@ -32,6 +38,7 @@ export const monthNameMap = new Map([
     ['12', 'Dec'],
 ]);
 
+/** Default date range to use on app init */
 export const DEFAULT_DATE_RANGE = {
     start: '2020-12-01',
     end: '2021-01-31'

@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { DateRange } from 'src/app/components/date-picker/range/date-range-picker.component';
-import { TransactionService } from 'src/app/service/transaction/transaction.service';
 import { Transaction } from 'src/app/model/transaction';
-import { findAllCategories } from 'src/app/shared/transaction-utility-functions';
 import { getMonth, getMonthRange, getMonthYear, getYear } from 'src/app/shared/date-utility-functions';
 import { monthNameMap, SPEND_TRANSACTION_TYPES } from 'src/app/shared/transaction-constants';
 
@@ -13,6 +11,37 @@ import { monthNameMap, SPEND_TRANSACTION_TYPES } from 'src/app/shared/transactio
   styleUrls: ['./transactions-time-series-chart.component.css']
 })
 export class TransactionsTimeSeriesChartComponent {
+
+  @Input() dateRange: DateRange;
+  
+  _transactions: Transaction[];
+  
+  @Input() set transactions(value: Transaction[]) {
+    if (value) {
+      this._transactions = value;
+      this.monthRange = getMonthRange(this.dateRange);
+      this.populateChartData();
+    }
+  }
+
+  get transactions(): Transaction[] {
+    return this._transactions;
+  }
+
+  _categorySelected: string;
+
+  @Input() set categorySelected(value: string) {
+    if (value) {
+      this._categorySelected = value;
+      this.populateChartData();
+    }
+  }
+
+  get categorySelected(): string {
+    return this._categorySelected;
+  }
+
+  monthRange: string[];
 
   highcharts = Highcharts;
 
@@ -35,63 +64,11 @@ export class TransactionsTimeSeriesChartComponent {
     colors: ['#19cf25', '#cf1919', '#000000'],
   };
 
-  categoryOptions: {label: string, value: string}[];
-
-  transactionsData: Transaction[];
-
-  monthRange: string[];
-
-  _dateRange: DateRange;
-
-  @Input() set dateRange(value: DateRange) {
-    if (value) {
-      this._dateRange = value;
-      this.monthRange = getMonthRange(this._dateRange);
-      // this.chartOptions.xAxis[0].categories = this.monthRange;
-      this.loadTransactions();
-    }
-  }
-
-  get dateRange(): DateRange {
-    return this._dateRange;
-  }
-
-  _categorySelected: string;
-
-  set categorySelected(value: string) {
-    if (value) {
-      this._categorySelected = value;
-      this.populateChartData();
-    }
-  }
-
-  get categorySelected(): string {
-    return this._categorySelected;
-  }
-
-  constructor(private transactionService: TransactionService) { }
-
-  loadTransactions() {
-    this.transactionService.search(this.dateRange.start, this.dateRange.end).subscribe((data: Transaction[]) => {
-      this.transactionsData = data;
-      this.populateCategoryOptions();
-      this.populateChartData();
-    });
-  }
-
-  populateCategoryOptions() {
-    const categories = findAllCategories(this.transactionsData);
-    this.categoryOptions = Array.from(categories).map(category => {
-      return {
-        label: category.substring(0,1).toUpperCase() + category.substring(1),
-        value: category
-      }
-    });
-    this.categorySelected = this.categoryOptions ? this.categoryOptions[0].value : '';
-  }
-
   populateChartData() {
-    const transactionsForCategory = this.transactionsData.filter(transaction => transaction.category === this.categorySelected);
+    if (!this.transactions || !this.categorySelected) {
+      return;
+    }
+    const transactionsForCategory = this.transactions.filter(transaction => transaction.category === this.categorySelected);
     const series = [];
     SPEND_TRANSACTION_TYPES.forEach(type => {
       const line: any[] = []; 

@@ -3,5 +3,6 @@
     <div style="height: 90vh; width: 90vw">
         <app-transaction-detail-table [dateRange]="dateRange"></app-transaction-detail-table>
     </div>
-    <app-transactions-time-series-chart [dateRange]="dateRange"></app-transactions-time-series-chart>
+    <app-transaction-selector [transactions]="transactions" [type]="categoryType" (optionSelected)="onCategoryChanged($event)"></app-transaction-selector>
+    <app-transactions-time-series-chart [dateRange]="dateRange" [transactions]="transactions" [categorySelected]="categorySelected"></app-transactions-time-series-chart>
 </div>
