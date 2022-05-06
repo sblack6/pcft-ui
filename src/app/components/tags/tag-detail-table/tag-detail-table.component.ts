@@ -47,7 +47,7 @@ export class TagDetailTableComponent {
     }
     const transactionsForTag = this.transactions.filter(transaction => transaction.tags && transaction.tags.includes(this.tagSelected));
     console.log('Transactions for tag: ', transactionsForTag)
-    this.total = transactionsForTag.map(transaction => transaction.amount).reduce((partialSum, a) => partialSum + a, 0);
+    this.total = Math.abs(transactionsForTag.map(transaction => transaction.amount).reduce((partialSum, a) => partialSum + a, 0));
     this.findCategoryTotals(transactionsForTag);
     this.findTagTotals(transactionsForTag);
   }
@@ -61,7 +61,7 @@ export class TagDetailTableComponent {
         .reduce((partialSum, a) => partialSum + a, 0);
       categoryTotals.push({
         category: category,
-        total: amount,
+        total: Math.abs(amount),
       });
     });
     this.categoryTotals = categoryTotals;
@@ -77,7 +77,7 @@ export class TagDetailTableComponent {
         .reduce((partialSum, a) => partialSum + a, 0);
     tagTotals.push({
       tag: this.tagSelected,
-      total: amount,
+      total: Math.abs(amount),
     });
     // Find the total of transactions for all other tags.
     tags.forEach(tag => {
@@ -86,7 +86,7 @@ export class TagDetailTableComponent {
         .reduce((partialSum, a) => partialSum + a, 0);
       tagTotals.push({
         tag: tag,
-        total: amount,
+        total: Math.abs(amount),
       });
     });
 

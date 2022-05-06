@@ -1,19 +1,33 @@
-<span>Total: ${{total}}</span>
-<table>
-    <tr>
-        <th>Category</th>
-        <th>Tag</th>
-    </tr>
-    <tr>
-        <td>
+<div style="width: 300px">
+    <div class="centered bold">
+        Total:   ${{total}}
+    </div>
+    <div class="flex">
+        <div class="flex-column padding-16 full-width">
+            <div class="bold centered">Category</div>
             <ng-container *ngFor="let item of categoryTotals">
-                <span>{{item.category}}: {{item.total}}</span><br/>
+                <div class="flex-item flex">
+                    <div class="flex-item" style="text-align: left;">
+                        <span>{{item.category}}</span>
+                    </div>
+                    <div class="flex-item" style="text-align: right;">
+                        <span>${{item.total}}</span>
+                    </div>
+                </div>
             </ng-container>
-        </td>
-        <td>
+        </div>
+        <div class="flex-column padding-16 border-left full-width">
+            <div class="bold centered">Tag</div>
             <ng-container *ngFor="let item of tagTotals">
-                <span>{{item.tag}}: {{item.total}}</span><br/>
+                <div class="flex-item flex">
+                    <div class="flex-item" style="text-align: left;">
+                        <span>{{item.tag}}</span>
+                    </div>
+                    <div class="flex-item" style="text-align: right;">
+                        <span>${{item.total}}</span>
+                    </div>
+                </div>
             </ng-container>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

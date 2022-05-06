@@ -84,3 +84,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex-align-right {
     margin-left: auto;
 }
+
+.full-width {
+    width: 100%;
+}
