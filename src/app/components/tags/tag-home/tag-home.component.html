@@ -15,5 +15,9 @@
             <app-transaction-selector class="flex-item" [transactions]="transactions" [type]="categoryType" (optionSelected)="onCategoryChanged($event)"></app-transaction-selector>
             <app-category-tag-detail class="flex-item" [dateRange]="dateRange" [transactions]="transactions" [categorySelected]="categorySelected"></app-category-tag-detail>
         </div>
+        <div class="flex-column padding-16">
+            <app-transaction-selector [transactions]="transactions" [type]="tagType" (optionSelected)="onTagChanged($event)" multiple></app-transaction-selector>
+            <app-tag-bar-chart [tags]="multiTagSelected" [transactions]="transactions"></app-tag-bar-chart>            
+        </div>
     </div>
 </div>
