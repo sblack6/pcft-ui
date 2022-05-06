@@ -15,11 +15,29 @@ import { convertTransactionsToRows, findAllCategories, getRowMeasuresForType } f
 })
 export class TransactionDetailTableComponent {
 
+  @Input() isAbridged = false;
+
+  @Input() dateRange: DateRange;
+
+  _transactions: Transaction[];
+
+  @Input() set transactions(value: Transaction[]) {
+    if (value) {
+      this._transactions = value;
+      this.monthRange = getMonthRange(this.dateRange);
+      this.createColumnDefs();
+      this.initTransactionGridData();
+      this.isLoading = false;
+    }
+  }
+
+  get transactions(): Transaction[] {
+    return this._transactions;
+  }
+
+  isLoading = true;
+
   gridApi;
-
-  isLoading = false;
-
-  transactionsData: Transaction[];
 
   gridData;
 
@@ -81,26 +99,6 @@ export class TransactionDetailTableComponent {
       ]
     }
   ];
-
-  _dateRange: DateRange;
-
-  @Input() isAbridged = false;
-
-  @Input() set dateRange(value: DateRange) {
-    if (value) {
-      this.isLoading = true;
-      this._dateRange = value;
-      this.monthRange = getMonthRange(this.dateRange);
-      this.createColumnDefs();
-      this.loadTransactionData();
-    }
-  }
-
-  get dateRange(): DateRange {
-    return this._dateRange;
-  }
-
-  constructor(private transactionService: TransactionService) { }
   
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
@@ -168,17 +166,9 @@ export class TransactionDetailTableComponent {
     })
   }
 
-  loadTransactionData() {
-    this.transactionService.search(this.dateRange.start, this.dateRange.end).subscribe((data: Transaction[]) => {
-      this.transactionsData = data;
-      this.initTransactionGridData();
-      this.isLoading = false;
-    });
-  }
-
   initTransactionGridData() {
-    const categories = findAllCategories(this.transactionsData);
-    let rowData: any[] = convertTransactionsToRows(this.transactionsData, categories, this.monthRange, this.gridTransactionTypes);
+    const categories = findAllCategories(this.transactions);
+    let rowData: any[] = convertTransactionsToRows(this.transactions, categories, this.monthRange, this.gridTransactionTypes);
     const measureTypes = this.isAbridged ? this.monthSubTypes : [BALANCE];
     rowData.push(this.generateTotalRow(rowData));
     rowData = getRowMeasuresForType(rowData, measureTypes, this.monthRange.length);

@@ -1,7 +1,7 @@
 <div class="padding-16">
     <app-date-range-picker (dateChanged)="onDateChanged($event)"></app-date-range-picker>
     <div style="height: 90vh; width: 90vw">
-        <app-transaction-detail-table [dateRange]="dateRange"></app-transaction-detail-table>
+        <app-transaction-detail-table [dateRange]="dateRange" [transactions]="transactions"></app-transaction-detail-table>
     </div>
     <app-transaction-selector [transactions]="transactions" [type]="categoryType" (optionSelected)="onCategoryChanged($event)"></app-transaction-selector>
     <app-transactions-time-series-chart [dateRange]="dateRange" [transactions]="transactions" [categorySelected]="categorySelected"></app-transactions-time-series-chart>
