@@ -12,6 +12,8 @@ export class TransactionSelectorComponent {
 
   @Output() optionSelected: EventEmitter<string> = new EventEmitter();
 
+  @Input() multiple: boolean;
+
   @Input() type: string;
 
   _transactions: Transaction[];
