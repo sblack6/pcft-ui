@@ -101,8 +101,9 @@ export class CategoryTagDetailComponent {
   }
 
   populateTagTimeSeriesData(transactionsForCategory: Transaction[], series: any[]) {
-    const tags = findAllTags(transactionsForCategory);
+    const tags: Set<string> = new Set();
     tags.add('');
+    findAllTags(transactionsForCategory).forEach(tag => tags.add(tag));
     tags.forEach(tag => {
       const line: [string, number][] = [];
       this.monthRange.forEach(monthYear => {
