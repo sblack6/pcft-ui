@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GridReadyEvent } from 'ag-grid-community';
 import { Transaction } from 'src/app/model/transaction';
-import { TransactionService } from 'src/app/service/transaction/transaction.service';
 import { getMonthRange } from 'src/app/shared/date-utility-functions';
 import { currencyFormatter } from 'src/app/shared/grid-utility-functions';
 import { findAllTags } from 'src/app/shared/transaction-utility-functions';
@@ -14,11 +13,27 @@ import { DateRange } from '../../date-picker/range/date-range-picker.component';
 })
 export class TagOverviewComponent {
 
-  isLoading = false;
+  @Input() dateRange: DateRange;
 
-  transactionsData: Transaction[];
+  _transactions: Transaction[];
+
+  @Input() set transactions(value: Transaction[]) {
+    if (value) {
+      this._transactions = value;
+      console.log('Got transactions: ', this.transactions)
+      this.initGridData();
+    }
+  }
+
+  get transactions(): Transaction[] {
+    return this._transactions;
+  }
+
+  isLoading = true;
 
   gridApi;
+
+  columnApi;
 
   gridData;
 
@@ -45,42 +60,21 @@ export class TagOverviewComponent {
       valueFormatter: currencyFormatter,
     },
   ];
-  
-  _dateRange: DateRange;
-  @Input() set dateRange(value: DateRange) {
-    if (value) {
-      this._dateRange = value;
-      this.loadTransactions();
-    }
-  }
-
-  get dateRange(): DateRange {
-    return this._dateRange;
-  }
-
-  constructor(private transactionService: TransactionService) {}
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
+    this.columnApi = params.columnApi;
     this.gridApi.setRowData(this.gridData);
     params.columnApi.autoSizeAllColumns();
-  }
-
-  loadTransactions() {
-    this.isLoading = true;
-    this.transactionService.search(this.dateRange.start, this.dateRange.end).subscribe((data: Transaction[]) => {
-      this.transactionsData = data;
-      this.initGridData();
-      this.isLoading = false;
-    });
   }
 
   initGridData() {
     const rows = [];
     const months = getMonthRange(this.dateRange).length;
-    const tags = findAllTags(this.transactionsData);
+    const tags = findAllTags(this.transactions);
+    console.log('Got tags: ', tags)
     tags.forEach(tag => {
-      const tagAmt = this.transactionsData
+      const tagAmt = this.transactions
         .filter(transaction => transaction.tags && transaction.tags.includes(tag))
         .map(transaction => transaction.amount)
         .reduce((partialSum, a) => partialSum + a, 0);
@@ -91,6 +85,10 @@ export class TagOverviewComponent {
       });
     });
     this.gridData = rows;
+    if (this.columnApi) {
+      this.columnApi.autoSizeAllColumns();
+    }
+    this.isLoading = false;
   }
 
 }
