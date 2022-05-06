@@ -1,1 +1,19 @@
-<p>tag-detail-table works!</p>
+<span>Total: ${{total}}</span>
+<table>
+    <tr>
+        <th>Category</th>
+        <th>Tag</th>
+    </tr>
+    <tr>
+        <td>
+            <ng-container *ngFor="let item of categoryTotals">
+                <span>{{item.category}}: {{item.total}}</span><br/>
+            </ng-container>
+        </td>
+        <td>
+            <ng-container *ngFor="let item of tagTotals">
+                <span>{{item.tag}}: {{item.total}}</span><br/>
+            </ng-container>
+        </td>
+    </tr>
+</table>
