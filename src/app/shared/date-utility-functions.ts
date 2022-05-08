@@ -50,12 +50,12 @@ export function getYearRange(dateRange: DateRange): string[] {
     const endYear = getYear(dateRange.end);
 
     let currentYear = Number.parseInt(startYear);
-    const yearRange = [startYear + '-01-01'];
+    const yearRange = [startYear + '-01'];
 
     let isStartEqualEnd = startYear === endYear;
     while (!isStartEqualEnd) {
         currentYear++;
-        yearRange.push(currentYear + '-01-01');
+        yearRange.push(currentYear + '-01');
         isStartEqualEnd = currentYear.toString() === endYear;
     }
     return yearRange;

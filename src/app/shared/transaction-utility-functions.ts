@@ -68,7 +68,6 @@ export function convertTransactionsToSimpleRows(transactions: Transaction[], cat
         row['total'] = Object.keys(row).map(key => Number.isFinite(row[key]) ? row[key] : 0).reduce((partialSum, a) => partialSum + a,0);
         rows.push(row);
     });
-    console.log('Rows: ', rows);
     return rows;
 }
 
