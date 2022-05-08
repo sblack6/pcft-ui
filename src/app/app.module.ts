@@ -31,6 +31,8 @@ import { TagHomeComponent } from './components/tags/tag-home/tag-home.component'
 import { CategoryTagDetailComponent } from './components/tags/category-tag-detail/category-tag-detail.component';
 import { TagDetailTableComponent } from './components/tags/tag-detail-table/tag-detail-table.component';
 import { TransactionSelectorComponent } from './components/selector/transaction-selector.component';
+import { SavingsHomeComponent } from './components/savings/savings-home/savings-home.component';
+import { CashFlowHomeComponent } from './components/cash-flow/cash-flow-home/cash-flow-home.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { TransactionSelectorComponent } from './components/selector/transaction-
     CategoryTagDetailComponent,
     TagDetailTableComponent,
     TransactionSelectorComponent,
+    SavingsHomeComponent,
+    CashFlowHomeComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
