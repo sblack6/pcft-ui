@@ -51,6 +51,37 @@ export function convertTransactionsToRows(transactions: Transaction[], categorie
     return rows;
 }
 
+export function convertTransactionsToSimpleRows(transactions: Transaction[], categories: Set<string>, months: string[]): any[] {
+    const rows = [];
+    categories.forEach(category => {
+        const row = { 'category': category };
+        months.forEach(month => {
+            const amount = transactions.filter(transaction => 
+                transaction.category === category &&
+                getMonthYear(transaction.date)=== month
+            ).map(
+                transaction => transaction.amount
+            ).reduce((partialSum, a) => partialSum + a, 0);
+
+            row[month] = amount;
+        });
+        rows.push(row);
+    });
+    return rows;
+}
+
+export function generateTotalRow(rowData: any[]) {
+    const totalRow = {
+      category: 'Total'
+    };
+    Object.keys(rowData[0]).forEach(key => {
+      if (key !== 'category') {
+        totalRow[key] = rowData.map(row => row[key] ?? 0).reduce((partialSum, a) => partialSum + a, 0);
+      }
+    });
+    return totalRow;
+}
+
 export function getRowMeasuresForType(rows, types: string[], numMonths: number) {
     rows.forEach((row, index) => {
         types.forEach(type => {

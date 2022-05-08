@@ -45,6 +45,22 @@ export function getMonthRange(dateRange: DateRange): string[] {
     return monthRange;
 }
 
+export function getYearRange(dateRange: DateRange): string[] {
+    const startYear = getYear(dateRange.start);
+    const endYear = getYear(dateRange.end);
+
+    let currentYear = Number.parseInt(startYear);
+    const yearRange = [startYear + '-01-01'];
+
+    let isStartEqualEnd = startYear === endYear;
+    while (!isStartEqualEnd) {
+        currentYear++;
+        yearRange.push(currentYear + '-01-01');
+        isStartEqualEnd = currentYear.toString() === endYear;
+    }
+    return yearRange;
+}
+
 function iterateMonthYear(monthYear: string): string {
     let month = Number.parseInt(getMonth(monthYear));
     let year = Number.parseInt(getYear(monthYear));

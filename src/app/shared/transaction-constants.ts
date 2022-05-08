@@ -54,3 +54,8 @@ export const TAG_DATE_RANGE: DateRange = {
 };
 
 export const DEFAULT_ANNUAL_DATE = '2021-12-31';
+
+export const DEFAULT_ANNUAL_DATE_RANGE = {
+    start: '2021-01-01',
+    end: '2021-01-01'
+};
