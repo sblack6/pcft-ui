@@ -19,7 +19,6 @@ export class TagHomeComponent implements OnInit {
 
   categorySelected: string;
   tagSelected: string;
-  multiTagSelected: string;
 
   constructor(private transactionService: TransactionService) {}
 
@@ -44,10 +43,6 @@ export class TagHomeComponent implements OnInit {
 
   onTagChanged($event) {
     this.tagSelected = $event;
-  }
-
-  onTagMultipleSelectChanged($event) {
-    this.multiTagSelected = $event;
   }
 
 }

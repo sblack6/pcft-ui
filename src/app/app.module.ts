@@ -31,8 +31,6 @@ import { TagHomeComponent } from './components/tags/tag-home/tag-home.component'
 import { CategoryTagDetailComponent } from './components/tags/category-tag-detail/category-tag-detail.component';
 import { TagDetailTableComponent } from './components/tags/tag-detail-table/tag-detail-table.component';
 import { TransactionSelectorComponent } from './components/selector/transaction-selector.component';
-import { TagBarChartComponent } from './components/tags/tag-bar-chart/tag-bar-chart.component';
-
 
 @NgModule({
   declarations: [
@@ -52,7 +50,6 @@ import { TagBarChartComponent } from './components/tags/tag-bar-chart/tag-bar-ch
     CategoryTagDetailComponent,
     TagDetailTableComponent,
     TransactionSelectorComponent,
-    TagBarChartComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
