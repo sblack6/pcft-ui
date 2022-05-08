@@ -3,7 +3,7 @@
         <div class="flex-third">
             <div class="header-height border-bottom flex-column">
                 <span class="padding-16 bold">Budget Editor</span>
-                <app-date-month-picker (dateChanged)="budgetMonthSelected($event)"></app-date-month-picker>
+                <app-date-picker (dateChanged)="budgetMonthSelected($event)"></app-date-picker>
             </div>
             <app-budget-edit-table [type]="BUDGET" [date]="budgetEditorMonth"></app-budget-edit-table>
         </div>

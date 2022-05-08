@@ -17,7 +17,6 @@ import { TransactionService } from './service/transaction/transaction.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BudgetEditorComponent } from './components/budget/budget-editor/budget-editor.component';
 import { BudgetEditTableComponent } from './components/budget/budget-edit-table/budget-edit-table.component';
-import { DateMonthPickerComponent } from './components/date-picker/month/date-month-picker.component';
 import { BudgetHomeComponent } from './components/budget/budget-home/budget-home.component';
 import { TransactionDetailTableComponent } from './components/budget/transaction-detail-table/transaction-detail-table.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -36,6 +35,7 @@ import { CashFlowHomeComponent } from './components/cash-flow/cash-flow-home/cas
 import { TransactionEditComponent } from './components/transactions/transaction-edit/transaction-edit.component';
 import { TransactionTableComponent } from './components/transactions/transaction-table/transaction-table.component';
 import { TransactionEditPageComponent } from './components/transactions/transaction-edit-page/transaction-edit-page.component';
+import { DatePickerComponent } from './components/date-picker/single/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { TransactionEditPageComponent } from './components/transactions/transact
     HomeComponent,
     BudgetEditorComponent,
     BudgetEditTableComponent,
-    DateMonthPickerComponent,
+    DatePickerComponent,
     BudgetHomeComponent,
     TransactionDetailTableComponent,
     FileUploadComponent,
