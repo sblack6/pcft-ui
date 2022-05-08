@@ -36,6 +36,7 @@ import { TransactionEditComponent } from './components/transactions/transaction-
 import { TransactionTableComponent } from './components/transactions/transaction-table/transaction-table.component';
 import { TransactionEditPageComponent } from './components/transactions/transaction-edit-page/transaction-edit-page.component';
 import { DatePickerComponent } from './components/date-picker/single/date-picker.component';
+import { StackedBarComponent } from './components/transactions/stacked-bar/stacked-bar.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DatePickerComponent } from './components/date-picker/single/date-picker
     TransactionEditComponent,
     TransactionTableComponent,
     TransactionEditPageComponent,
+    StackedBarComponent,
   ],
   imports: [
     AgGridModule.withComponents([]),
