@@ -1,9 +1,12 @@
+import { DateRange } from "../components/date-picker/range/date-range-picker.component";
+
 /* Transaction Type enum values */
 export const TYPE_BUDGET = 'BUDGET';
 export const TYPE_DEFAULT_BUDGET = 'DEFAULT_BUDGET';
 export const TYPE_INCOME = 'INCOME';
 export const TYPE_SAVINGS = 'SAVINGS';
 export const TYPE_TRANSACTION = 'TRANSACTION';
+export const TYPE_ANNUAL = 'ANNUAL';
 export const BALANCE = 'balance';
 
 export const ALL_TRANSACTION_TYPES = [TYPE_BUDGET, TYPE_DEFAULT_BUDGET, TYPE_INCOME, TYPE_SAVINGS, TYPE_TRANSACTION];
@@ -39,13 +42,15 @@ export const monthNameMap = new Map([
 ]);
 
 /** Default date range to use on app init */
-export const DEFAULT_DATE_RANGE = {
+export const DEFAULT_DATE_RANGE: DateRange = {
     start: '2020-12-01',
     end: '2021-01-31'
 };
 
 // TODO: temporary date range for testing.
-export const TAG_DATE_RANGE = {
+export const TAG_DATE_RANGE: DateRange = {
     start: '2022-03-01',
     end: '2022-04-30'
 };
+
+export const DEFAULT_ANNUAL_DATE = '2021-12-31';
