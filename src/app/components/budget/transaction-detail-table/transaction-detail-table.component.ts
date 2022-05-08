@@ -6,7 +6,7 @@ import { TransactionService } from 'src/app/service/transaction/transaction.serv
 import { getMonth, getMonthRange, getYear } from 'src/app/shared/date-utility-functions';
 import { cellHighlighter, currencyFormatter } from 'src/app/shared/grid-utility-functions';
 import { BALANCE, monthNameMap, SPEND_TRANSACTION_TYPES, typeNameMap } from 'src/app/shared/transaction-constants';
-import { convertTransactionsToRows, findAllCategories, getRowMeasuresForType } from 'src/app/shared/transaction-utility-functions';
+import { convertTransactionsToRows, findAllCategories, generateTotalRow, getRowMeasuresForType } from 'src/app/shared/transaction-utility-functions';
 
 @Component({
   selector: 'app-transaction-detail-table',
@@ -170,21 +170,9 @@ export class TransactionDetailTableComponent {
     const categories = findAllCategories(this.transactions);
     let rowData: any[] = convertTransactionsToRows(this.transactions, categories, this.monthRange, this.gridTransactionTypes);
     const measureTypes = this.isAbridged ? this.monthSubTypes : [BALANCE];
-    rowData.push(this.generateTotalRow(rowData));
+    rowData.push(generateTotalRow(rowData));
     rowData = getRowMeasuresForType(rowData, measureTypes, this.monthRange.length);
     this.gridData = rowData;
-  }
-
-  generateTotalRow(rowData: any[]) {
-    const totalRow = {
-      category: 'Total'
-    };
-    Object.keys(rowData[0]).forEach(key => {
-      if (key !== 'category') {
-        totalRow[key] = rowData.map(row => row[key] ?? 0).reduce((partialSum, a) => partialSum + a, 0);
-      }
-    });
-    return totalRow;
   }
 
 }

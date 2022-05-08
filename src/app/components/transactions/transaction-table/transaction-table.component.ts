@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { GridReadyEvent } from 'ag-grid-community';
 import { Transaction } from 'src/app/model/transaction';
-import { getMonth, getMonthRange, getYear } from 'src/app/shared/date-utility-functions';
+import { getMonth, getYear } from 'src/app/shared/date-utility-functions';
 import { currencyFormatter } from 'src/app/shared/grid-utility-functions';
 import { monthNameMap } from 'src/app/shared/transaction-constants';
 import { convertTransactionsToSimpleRows, findAllCategories, generateTotalRow } from 'src/app/shared/transaction-utility-functions';
-import { DateRange } from '../../date-picker/range/date-range-picker.component';
 
 @Component({
   selector: 'app-transaction-table',
@@ -29,7 +28,7 @@ export class TransactionTableComponent {
   get transactions(): Transaction[] {
     return this._transactions;
   }
-  
+
   isLoading = true;
 
   gridApi;
@@ -42,19 +41,19 @@ export class TransactionTableComponent {
     defaultColDef: {
       resizable: true,
     },
-    skipHeaderOnAutoSize: true
   };
 
-  columnDefs = [
+  columnDefs: any[] = [
     {
       headerName: 'Category',
       field: 'category',
-      pinned: 'right'
+      pinned: 'left'
     },
     {
       headerName: 'Total',
       field: 'total',
       valueFormatter: currencyFormatter,
+      pinned: 'right',
     },
   ];
 
@@ -82,8 +81,8 @@ export class TransactionTableComponent {
   populateGridData() {
     const categories = findAllCategories(this.transactions);
     const rows = convertTransactionsToSimpleRows(this.transactions, categories, this.monthRange);
-    rows.push(generateTotalRow(rows));
     this.gridData = rows;
+    this.isLoading = false;
   }
 
 }
