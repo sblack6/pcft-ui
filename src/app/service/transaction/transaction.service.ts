@@ -51,10 +51,10 @@ export class TransactionService {
     return this.http.get(`${this.transactions_url}/search?type=${TYPE_DEFAULT_BUDGET}`)
   }
 
-  uploadTransactions(source: string, file: File): Observable<any> {
+  uploadTransactions(source: string, file: File, type: string): Observable<any> {
     let formData: FormData = new FormData();
     formData.append("file", file);
-    return this.http.post(`${this.transactions_url}/upload-transactions?source=${source}`, formData)
+    return this.http.post(`${this.transactions_url}/upload-transactions?source=${source}&type=${type}`, formData)
   }
 
 }

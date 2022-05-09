@@ -1,13 +1,8 @@
 <div class="padding-16">
-    <!-- <mat-form-field style="width: 100%; padding: 12px 12px;">
-         <mat-label>Source of the Transactions File</mat-label>
-         <mat-select [(ngModel)]="source">
-             <mat-option value="personal-capital">Personal Capital</mat-option>
-         </mat-select>
-     </mat-form-field> -->
      <input class="form-control" type="file" 
-             (change)="onChange($event)">
+        (change)="onChange($event)">
+    <input [(ngModel)]="type">
      <button mat-stroked-button (click)="uploadFile()">
-         Upload Transactions File
+        Upload Transactions File
      </button>
  </div>

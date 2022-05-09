@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TYPE_TRANSACTION } from 'src/app/shared/transaction-constants';
 import { TransactionService } from '../../service/transaction/transaction.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { TransactionService } from '../../service/transaction/transaction.servic
 })
 export class FileUploadComponent {
 
+  type = TYPE_TRANSACTION;
   source = "personal-capital"
   file: any = null;
 
@@ -18,7 +20,7 @@ export class FileUploadComponent {
   }
 
   uploadFile() {
-    this.transactionService.uploadTransactions(this.source, this.file).subscribe((data) => {
+    this.transactionService.uploadTransactions(this.source, this.file, this.type).subscribe((data) => {
       console.log('Uploaded transactions: ', data)
     });
   }
