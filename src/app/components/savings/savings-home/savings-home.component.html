@@ -1,1 +1,3 @@
-<p>savings-home works!</p>
+<app-date-range-picker (dateChanged)="onDateChanged($event)"></app-date-range-picker>
+<app-transaction-table [transactions]="transactions" [monthRange]="monthRange"></app-transaction-table>
+<app-stacked-bar [monthRange]="monthRange" [transactions]="transactions"></app-stacked-bar>
