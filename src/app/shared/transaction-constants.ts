@@ -43,15 +43,12 @@ export const monthNameMap = new Map([
 
 /** Default date range to use on app init */
 export const DEFAULT_DATE_RANGE: DateRange = {
-    start: '2020-12-01',
-    end: '2021-01-31'
+    start: '2020-11-01',
+    end: '2022-05-01'
 };
 
 // TODO: temporary date range for testing.
-export const TAG_DATE_RANGE: DateRange = {
-    start: '2022-03-01',
-    end: '2022-04-30'
-};
+export const TAG_DATE_RANGE = DEFAULT_DATE_RANGE;
 
 export const DEFAULT_ANNUAL_DATE = '2021-01-01';
 
