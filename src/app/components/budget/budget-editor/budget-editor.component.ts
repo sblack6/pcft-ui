@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DateRange } from 'src/app/components/date-picker/range/date-range-picker.component';
-import { TYPE_BUDGET } from 'src/app/shared/transaction-constants';
+import { TYPE_BUDGET, TYPE_TRANSACTION } from 'src/app/shared/transaction-constants';
 import { meanAmountByCategory } from 'src/app/shared/transaction-utility-functions';
 import { Transaction } from '../../../model/transaction';
 import { TransactionService } from '../../../service/transaction/transaction.service';
@@ -25,7 +25,7 @@ export class BudgetEditorComponent {
   }
 
   onDateRangeSelected($event: DateRange) {
-    this.transactionService.search($event.start, $event.end, TYPE_BUDGET).subscribe((data: Transaction[]) => {
+    this.transactionService.search($event.start, $event.end, TYPE_TRANSACTION).subscribe((data: Transaction[]) => {
       this.budgetAverageItems = meanAmountByCategory(data, $event.start, $event.end);
     });
   }
